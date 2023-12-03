@@ -41,9 +41,9 @@ detrend <- function(vec,std){
 }
 
 ###function to create symmetric matrix from vector
-#' Title
+#' Create a Symmetric Matrix From a Vector
 #'
-#' @param x
+#' @param x Vector
 #' @param n
 #'
 #' @return
@@ -267,11 +267,11 @@ eba.flat <- function(f,partfinal,ghat,covg){
 ###wrapper function
 #' Title
 #'
-#' @param X
-#' @param N
-#' @param K
-#' @param std
-#' @param alpha
+#' @param X numeric vector with a length > 0 and not missing or non-finite values
+#' @param N number of of observations per approximately stationary block
+#' @param K number of tapers to use in multitaper spectral estimator
+#' @param std TRUE/FALSE Boolean: should the variance of each stationary block be set to one across all blocks?
+#' @param alpha significance level to use for testing partition points using FRESH statistic
 #'
 #' @return
 #' @export
