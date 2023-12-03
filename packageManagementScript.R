@@ -1,4 +1,6 @@
 # package management script
+# WARNING: this script is a log of steps taken to debug and make the pkg. do not run this file each time!
+
 
 # install R packages for packaging
 # install.packages(c("devtools", "usethis", "roxygen2"))
@@ -25,10 +27,10 @@ use_build_ignore(c("EBA_functions.R"))
 # add author and manager
 
 # add Dr. Bruce
-use_author(
+usethis::use_author(
   given = "Scott",
   family = "Bruce",
-  role = c("aut", "cre"),
+  role = c("aut"),
   email = "sabruce@tamu.edu"
 )
 
@@ -44,15 +46,18 @@ use_author(
 use_author(
   given = "Dylan",
   family = "Ward",
-  role = c("cre"),
 )
 
 # add Mohit Chhaparia
 use_author(
   given = "Mohit",
   family = "Chhaparia",
-  role = c("cre"),
 )
+
+
+# other desc file changes with usethis
+
+
 
 # add GPL 3 liscense
 usethis::use_gpl3_license()
