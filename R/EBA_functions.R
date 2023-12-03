@@ -16,7 +16,7 @@
 #############################################################################
 
 ###function to linearly detrend a data series
-#' Title
+#' Linearly Detrend a Data Series
 #'
 #' @param vec Vector of ...
 #' @param std TRUE/FALSE Boolean: Should the variance of each stationary block be set to one across all blocks?
