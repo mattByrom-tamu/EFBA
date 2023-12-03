@@ -19,6 +19,8 @@ library(ggplot2)
 
 # ignored files
 use_build_ignore(c("packageManagementScript.R"))
+use_build_ignore(c("EBA_functions.R"))
+
 
 # add author and manager
 
@@ -69,3 +71,12 @@ usethis::use_package("signal", type = "Imports")
 usethis::use_package("fossil", type = "Imports")
 
 devtools::install_github("mattByrom-tamu/EFBA")
+
+vignette("rd", package = "roxygen2")
+
+
+# testing EBA functions
+devtools::load_all()
+exists("mtspc", where = globalenv(), inherits = FALSE) # returned false so looks like it's working
+devtools::check() # no errors currently
+
