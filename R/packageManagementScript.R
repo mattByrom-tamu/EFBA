@@ -18,7 +18,7 @@ library(fossil)
 library(ggplot2)
 
 # ignored files
-use_build_ignore(c("packageManagementScript.R", "EBA-master", "fEBA-main", "mEBA-main"))
+use_build_ignore(c("packageManagementScript.R"))
 
 # add author and manager
 
@@ -54,7 +54,7 @@ use_author(
 
 # add GPL 3 liscense
 usethis::use_gpl3_license()
-usethis::use_mit_license()
+# usethis::use_mit_license()
 
 # create cpp infrastructure
 
@@ -68,4 +68,4 @@ usethis::use_package("viridis", type = "Imports")
 usethis::use_package("signal", type = "Imports")
 usethis::use_package("fossil", type = "Imports")
 
-devtools::install_github("mattByrom-tamu/EBAtimeseries")
+devtools::install_github("mattByrom-tamu/EFBA")
