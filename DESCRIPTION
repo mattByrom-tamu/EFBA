@@ -1,0 +1,21 @@
+Package: EFBA
+Type: Package
+Title: What the Package Does (Title Case)
+Version: 0.1.0
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+Authors@R: c(
+    person("Scott", "Bruce", , "sabruce@tamu.edu", role = c("aut", "cre")),
+    person("Matt", "Byrom", , "matthew.james.byrom@tamu.edu", role = "cre"),
+    person("Dylan", "Ward", role = "cre"),
+    person("Mohit", "Chhaparia", role = "cre")
+  )
+Imports: 
+    fields,
+    fossil,
+    momentchi2,
+    signal,
+    viridis
