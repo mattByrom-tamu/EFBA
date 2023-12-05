@@ -22,7 +22,7 @@
 #' @param std TRUE/FALSE Boolean: Should the variance of each stationary block be set to one across all blocks?
 #'
 #' @return vector of of the detrended vec parameter
-#' @export
+#' @NoRd
 #'
 #' @examples
 detrend <- function(vec,std){
@@ -47,7 +47,7 @@ detrend <- function(vec,std){
 #' @param n
 #'
 #' @return
-#' @export
+#' @NoRd
 #'
 #' @examples
 symmat <- function(x,n){
@@ -65,7 +65,7 @@ symmat <- function(x,n){
 #' @param K
 #'
 #' @return
-#' @export
+#' @NoRd
 #'
 #' @examples
 mtspc <- function(X,T,N,B,K){
@@ -86,7 +86,7 @@ mtspc <- function(X,T,N,B,K){
 #' @param tapers
 #'
 #' @return
-#' @export
+#' @NoRd
 #'
 #' @examples
 gcov <- function(X,B,N,K,tapers){
@@ -115,7 +115,7 @@ gcov <- function(X,B,N,K,tapers){
 #' @param N
 #'
 #' @return
-#' @export
+#' @NoRd
 #'
 #' @examples
 partN <- function(X,N){
@@ -138,7 +138,7 @@ partN <- function(X,N){
 }
 
 ###function to find frequency partition point using Hochberg step up rule
-#' Title
+#' Finds the frequency partition point using Hochberg step up rule
 #'
 #' @param X.dm
 #' @param f
@@ -148,7 +148,7 @@ partN <- function(X,N){
 #' @param alpha
 #'
 #' @return
-#' @export
+#' @NoRd
 #'
 #' @examples
 eba.b <- function(X.dm,f,startf,endf,covg,alpha) {
@@ -209,25 +209,18 @@ eba.b <- function(X.dm,f,startf,endf,covg,alpha) {
 }
 
 ###function to test for flat spectrum through time (i.e. frequency component contribution same across time)
-#' Title
+#' Tests for a flat spectrum through time (i.e. frequency component contribution same across time)
 #'
-#' @param f
-#' @param partfinal
-#' @param ghat
-#' @param covg
+#' @param f Fourier frequencies
+#' @param partfinal final partition using EBA algorithm
+#' @param ghat multitaper spectral estimates (N x B)
+#' @param covg estimated covariance of demeaned multitaper spectral estimates for b=1,...B (N x N x B)
 #'
-#' @return
+#' @return P-Value for test
 #' @export
 #'
 #' @examples
 eba.flat <- function(f,partfinal,ghat,covg){
-
-  #f - Fourier frequencies
-  #partfinal - final partition using EBA algorithm
-  #mtspec - multitaper spectral estimates (N x B)
-  #ghat - demeaned multitaper spectral estimates (N x B)
-  #covg - estimated covariance of demeaned multitaper spectral estimates for b=1,...B (N x N x B)
-
   #calculate test statistic for each band
   partidx <- which(f %in% partfinal[-1]); #indices for frequency partition
   nf <- diff(c(0,partidx)); #number of frequencies in each band
@@ -273,7 +266,7 @@ eba.flat <- function(f,partfinal,ghat,covg){
 #' @param std TRUE/FALSE Boolean: should the variance of each stationary block be set to one across all blocks?
 #' @param alpha significance level to use for testing partition points using FRESH statistic
 #'
-#' @return
+#' @return Results on partition of frequency space
 #' @export
 #'
 #' @examples
@@ -395,9 +388,10 @@ eba.search <- function(X,N,K,std,alpha){
 }
 
 ###function to simulate data for 3 different settings
-#' Title
+#' Function to simulate time series data with length 'T'
 #'
-#' @return
+#' @param T total length of intended time series
+#' @return List of 3 frequency series; wn (white noise), bl, and bs
 #' @export
 #'
 #' @examples
