@@ -16,5 +16,9 @@ Imports:
     fields,
     fossil,
     momentchi2,
+    Rcpp,
     signal,
     viridis
+RoxygenNote: 7.2.3
+LinkingTo: 
+    Rcpp

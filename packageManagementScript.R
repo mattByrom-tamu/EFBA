@@ -65,9 +65,6 @@ usethis::use_gpl3_license()
 
 # create cpp infrastructure
 
-
-
-
 # package dependencies for EBA
 usethis::use_package("momentchi2", type = "Imports")
 usethis::use_package("fields", type = "Imports")
@@ -85,3 +82,10 @@ devtools::load_all()
 exists("mtspc", where = globalenv(), inherits = FALSE) # returned false so looks like it's working
 devtools::check() # no errors currently
 
+# add C++, rcpp, and armadillo to code base
+usethis::use_rcpp_armadillo()
+
+# update documentation
+devtools::document()
+
+load_all()
