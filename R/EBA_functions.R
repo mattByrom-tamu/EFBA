@@ -18,13 +18,14 @@
 ###function to linearly detrend a data series
 #' Linearly Detrend a Data Series
 #'
-#' @param vec Vector of ...
-#' @param std TRUE/FALSE Boolean: Should the variance of each stationary block be set to one across all blocks?
+#' @param vec univariate time series
+#' @param std TRUE/FALSE Boolean: Do you want to standardize the total variance of the time series to 1?
 #'
-#' @return vector of of the detrended vec parameter
-#' @NoRd
+#' @return detrended and standardized time series
+#' @noRd
 #'
 #' @examples
+#' detrend(vec = eba.simdata(T=T)$wn,std = FALSE)
 detrend <- function(vec,std){
   #remove linear trend for each interval
   xmat <- cbind(matrix(1,length(vec),1),seq(1,length(vec),length=length(vec)));
@@ -47,7 +48,7 @@ detrend <- function(vec,std){
 #' @param n
 #'
 #' @return
-#' @NoRd
+#' @noRd
 #'
 #' @examples
 symmat <- function(x,n){
@@ -57,7 +58,7 @@ symmat <- function(x,n){
 }
 
 ###function to compute multitaper spectogram using sine tapers
-#' Title
+#' computes multitaper spectogram using sine tapers
 #'
 #' @param X
 #' @param N
@@ -65,7 +66,7 @@ symmat <- function(x,n){
 #' @param K
 #'
 #' @return
-#' @NoRd
+#' @noRd
 #'
 #' @examples
 mtspc <- function(X,T,N,B,K){
@@ -77,7 +78,7 @@ mtspc <- function(X,T,N,B,K){
 }
 
 ###function to find covariance matrix of demeaned spectral estimates
-#' Title
+#' finds covariance matrix of demeaned spectral estimates
 #'
 #' @param X
 #' @param B
@@ -86,7 +87,7 @@ mtspc <- function(X,T,N,B,K){
 #' @param tapers
 #'
 #' @return
-#' @NoRd
+#' @noRd
 #'
 #' @examples
 gcov <- function(X,B,N,K,tapers){
@@ -109,13 +110,13 @@ gcov <- function(X,B,N,K,tapers){
 }
 
 ###function to partition series into segments of size N
-#' Title
+#' partitions series into segments of size N
 #'
 #' @param X
 #' @param N
 #'
 #' @return
-#' @NoRd
+#' @noRd
 #'
 #' @examples
 partN <- function(X,N){
@@ -148,7 +149,7 @@ partN <- function(X,N){
 #' @param alpha
 #'
 #' @return
-#' @NoRd
+#' @noRd
 #'
 #' @examples
 eba.b <- function(X.dm,f,startf,endf,covg,alpha) {
@@ -216,8 +217,9 @@ eba.b <- function(X.dm,f,startf,endf,covg,alpha) {
 #' @param ghat multitaper spectral estimates (N x B)
 #' @param covg estimated covariance of demeaned multitaper spectral estimates for b=1,...B (N x N x B)
 #'
-#' @return P-Value for test
-#' @export
+#' @return Partition and associated p value
+#'
+#' @noRd
 #'
 #' @examples
 eba.flat <- function(f,partfinal,ghat,covg){
@@ -257,16 +259,22 @@ eba.flat <- function(f,partfinal,ghat,covg){
 
 }
 
+
 ###wrapper function
-#' Title
+#' Searches for frequency partitions for univariate time series
 #'
-#' @param X numeric vector with a length > 0 and not missing or non-finite values
+#' @param X univariate time series with a length > 0 and not missing or non-finite values
 #' @param N number of of observations per approximately stationary block
 #' @param K number of tapers to use in multitaper spectral estimator
-#' @param std TRUE/FALSE Boolean: should the variance of each stationary block be set to one across all blocks?
+#' @param std TRUE/FALSE Boolean: should the variance of each stationary block be standardized to one across all blocks?
 #' @param alpha significance level to use for testing partition points using FRESH statistic
 #'
-#' @return Results on partition of frequency space
+#' @return Results on partitions of frequency space
+#' flat: tests to see if the spectra have any time varying behavior. Low p value indicates low time varying behavior.
+#' pvals: tests each partition as a possible frequency
+#' final: final estimated frequency partition points
+#' list: gives you a list of identified frequency bands each pass of the algorithm
+#' log: for each pass of he algorithm, gives the indetified frequency, test statistic, thrshiold, pval, and significance (boolean)
 #' @export
 #'
 #' @examples
@@ -387,11 +395,14 @@ eba.search <- function(X,N,K,std,alpha){
   return(results)
 }
 
+
+
+
 ###function to simulate data for 3 different settings
 #' Function to simulate time series data with length 'T'
 #'
 #' @param T total length of intended time series
-#' @return List of 3 frequency series; wn (white noise), bl, and bs
+#' @return List of 3 frequency series; wn (white noise), bl, and bs (time series processes in the data, 3 different settings in the paper)
 #' @export
 #'
 #' @examples

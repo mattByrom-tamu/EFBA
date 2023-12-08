@@ -10,7 +10,7 @@ eba.simdata(T)
 \item{T}{total length of intended time series}
 }
 \value{
-List of 3 frequency series; wn (white noise), bl, and bs
+List of 3 frequency series; wn (white noise), bl, and bs (time series processes in the data, 3 different settings in the paper)
 }
 \description{
 Function to simulate time series data with length 'T'

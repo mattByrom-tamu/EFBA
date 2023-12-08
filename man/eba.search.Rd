@@ -2,24 +2,29 @@
 % Please edit documentation in R/EBA_functions.R
 \name{eba.search}
 \alias{eba.search}
-\title{Title}
+\title{Searches for frequency partitions for univariate time series}
 \usage{
 eba.search(X, N, K, std, alpha)
 }
 \arguments{
-\item{X}{numeric vector with a length > 0 and not missing or non-finite values}
+\item{X}{univariate time series with a length > 0 and not missing or non-finite values}
 
 \item{N}{number of of observations per approximately stationary block}
 
 \item{K}{number of tapers to use in multitaper spectral estimator}
 
-\item{std}{TRUE/FALSE Boolean: should the variance of each stationary block be set to one across all blocks?}
+\item{std}{TRUE/FALSE Boolean: should the variance of each stationary block be standardized to one across all blocks?}
 
 \item{alpha}{significance level to use for testing partition points using FRESH statistic}
 }
 \value{
-Results on partition of frequency space
+Results on partitions of frequency space
+flat: tests to see if the spectra have any time varying behavior. Low p value indicates low time varying behavior.
+pvals: tests each partition as a possible frequency
+final: final estimated frequency partition points
+list: gives you a list of identified frequency bands each pass of the algorithm
+log: for each pass of he algorithm, gives the indetified frequency, test statistic, thrshiold, pval, and significance (boolean)
 }
 \description{
-Title
+Searches for frequency partitions for univariate time series
 }
