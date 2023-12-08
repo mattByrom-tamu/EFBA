@@ -28,3 +28,6 @@ log: for each pass of he algorithm, gives the indetified frequency, test statist
 \description{
 Searches for frequency partitions for univariate time series
 }
+\examples{
+eba.search(X = eba.simdata(T= 50000)$wn, N = 500, K = 15, std = FALSE, alpha = .05)
+}

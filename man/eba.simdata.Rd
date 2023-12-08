@@ -15,3 +15,6 @@ List of 3 frequency series; wn (white noise), bl, and bs (time series processes 
 \description{
 Function to simulate time series data with length 'T'
 }
+\examples{
+eba.simdata(T=50000)
+}

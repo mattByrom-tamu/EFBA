@@ -10,12 +10,15 @@ library(roxygen2)
 library(desc)
 
 # install.packages(c("momentchi2", "fields", "viridis", "signal", "fossil"))
+# install.packages("stats")
+# install.packages("compositions")
 library(momentchi2)
 library(fields)
 library(viridis)
 library(signal)
 library(fossil)
-
+library(stats)
+library(compositions)
 # install.packages(c("ggplot2"))
 library(ggplot2)
 
@@ -71,7 +74,8 @@ usethis::use_package("fields", type = "Imports")
 usethis::use_package("viridis", type = "Imports")
 usethis::use_package("signal", type = "Imports")
 usethis::use_package("fossil", type = "Imports")
-
+usethis::use_package("compositions", type = "Imports")
+usethis::use_package("stats", type = "Imports")
 devtools::install_github("mattByrom-tamu/EFBA")
 
 vignette("rd", package = "roxygen2")
@@ -79,13 +83,16 @@ vignette("rd", package = "roxygen2")
 
 # testing EBA functions
 devtools::load_all()
-exists("mtspc", where = globalenv(), inherits = FALSE) # returned false so looks like it's working
+exists("eba.search", where = globalenv(), inherits = FALSE) # returned false so looks like it's working
 devtools::check() # no errors currently
 
 # add C++, rcpp, and armadillo to code base
 usethis::use_rcpp_armadillo()
 
-# update documentation
+# update documentation, have to delete namespace first sometimes
 devtools::document()
+
+# rmd readme document
+usethis::use_readme_rmd()
 
 load_all()

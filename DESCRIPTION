@@ -21,4 +21,3 @@ Imports:
     viridis
 RoxygenNote: 7.2.3
 LinkingTo: 
-    Rcpp

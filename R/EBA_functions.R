@@ -23,9 +23,10 @@
 #'
 #' @return detrended and standardized time series
 #' @noRd
+#' @importFrom stats sd
 #'
 #' @examples
-#' detrend(vec = eba.simdata(T=T)$wn,std = FALSE)
+#' detrend(vec = eba.simdata(T= 50000)$wn,std = FALSE)
 detrend <- function(vec,std){
   #remove linear trend for each interval
   xmat <- cbind(matrix(1,length(vec),1),seq(1,length(vec),length=length(vec)));
@@ -42,15 +43,16 @@ detrend <- function(vec,std){
 }
 
 ###function to create symmetric matrix from vector
-#' Create a Symmetric Matrix From a Vector
+#' creates symmetric matrix from vector
 #'
-#' @param x Vector
+#' @param x vector of
 #' @param n
 #'
-#' @return
+#' @return symmetric matrix from x and n
 #' @noRd
 #'
 #' @examples
+#' Used to calculate covf in gcov function
 symmat <- function(x,n){
   tmp <- matrix(0,n,n);
   tmp[lower.tri(tmp)] <- rep(x,n:1-1);
@@ -58,17 +60,20 @@ symmat <- function(x,n){
 }
 
 ###function to compute multitaper spectogram using sine tapers
-#' computes multitaper spectogram using sine tapers
+#' Title
 #'
-#' @param X
-#' @param N
-#' @param B
-#' @param K
+#' @param X univariate time series with a length > 0 and not missing or non-finite values
+#' @param T sqrt(N)
+#' @param N number of of observations per approximately stationary block
+#' @param B calculated from X and N
+#' @param K number of tapers to use in multitaper spectral estimator
 #'
-#' @return
+#' @return multitaper spectrogram
 #' @noRd
+#' @importFrom stats mvfft
 #'
 #' @examples
+#' used in eba.search to compute multitaper spectrogram using sine tapers
 mtspc <- function(X,T,N,B,K){
   tapers <- outer(1:N,1:K,FUN=function(n,k) sqrt(2/(N+1))*sin(pi*k*n/(N+1))); #sine tapers
   mtspec <- apply(X=X,MARGIN=2,FUN=function(x) rowMeans(Mod(mvfft(tapers*x))^2)); #multitaper estimates
@@ -78,7 +83,7 @@ mtspc <- function(X,T,N,B,K){
 }
 
 ###function to find covariance matrix of demeaned spectral estimates
-#' finds covariance matrix of demeaned spectral estimates
+#' Title
 #'
 #' @param X
 #' @param B
@@ -88,8 +93,9 @@ mtspc <- function(X,T,N,B,K){
 #'
 #' @return
 #' @noRd
-#'
-#' @examples
+#' @importFrom stats mvfft
+#' @importFrom stats toeplitz
+#' @examples compute covariance of de-meaned spectral estimates
 gcov <- function(X,B,N,K,tapers){
   #covariance component depending on smaller frequency (omega)
   covf.omega <- (X/K)^2;
@@ -110,7 +116,7 @@ gcov <- function(X,B,N,K,tapers){
 }
 
 ###function to partition series into segments of size N
-#' partitions series into segments of size N
+#' Title
 #'
 #' @param X
 #' @param N
@@ -118,7 +124,7 @@ gcov <- function(X,B,N,K,tapers){
 #' @return
 #' @noRd
 #'
-#' @examples
+#' @examples used to partition series into segments of size N in eba.search
 partN <- function(X,N){
   T <- length(X); #length of series
   B <- floor(T/N); #number of partition segments
@@ -139,7 +145,7 @@ partN <- function(X,N){
 }
 
 ###function to find frequency partition point using Hochberg step up rule
-#' Finds the frequency partition point using Hochberg step up rule
+#' Title
 #'
 #' @param X.dm
 #' @param f
@@ -151,7 +157,7 @@ partN <- function(X,N){
 #' @return
 #' @noRd
 #'
-#' @examples
+#' @examples used to identify changepoint candidates in eba.search
 eba.b <- function(X.dm,f,startf,endf,covg,alpha) {
 
   #initialize data container for results
@@ -210,18 +216,17 @@ eba.b <- function(X.dm,f,startf,endf,covg,alpha) {
 }
 
 ###function to test for flat spectrum through time (i.e. frequency component contribution same across time)
-#' Tests for a flat spectrum through time (i.e. frequency component contribution same across time)
+#' Title
 #'
-#' @param f Fourier frequencies
-#' @param partfinal final partition using EBA algorithm
-#' @param ghat multitaper spectral estimates (N x B)
-#' @param covg estimated covariance of demeaned multitaper spectral estimates for b=1,...B (N x N x B)
+#' @param f
+#' @param partfinal
+#' @param ghat
+#' @param covg
 #'
-#' @return Partition and associated p value
-#'
+#' @return
 #' @noRd
 #'
-#' @examples
+#' @examples used in eba.search to get tests for if spectra have any time varying behavior. Low p value indicates low time varying behavior.
 eba.flat <- function(f,partfinal,ghat,covg){
   #calculate test statistic for each band
   partidx <- which(f %in% partfinal[-1]); #indices for frequency partition
@@ -276,8 +281,9 @@ eba.flat <- function(f,partfinal,ghat,covg){
 #' list: gives you a list of identified frequency bands each pass of the algorithm
 #' log: for each pass of he algorithm, gives the indetified frequency, test statistic, thrshiold, pval, and significance (boolean)
 #' @export
-#'
+#' @importFrom momentchi2 sw
 #' @examples
+#' eba.search(X = eba.simdata(T= 50000)$wn, N = 500, K = 15, std = FALSE, alpha = .05)
 eba.search <- function(X,N,K,std,alpha){
 
   #check function arguments and specify defaults
@@ -404,10 +410,11 @@ eba.search <- function(X,N,K,std,alpha){
 #' @param T total length of intended time series
 #' @return List of 3 frequency series; wn (white noise), bl, and bs (time series processes in the data, 3 different settings in the paper)
 #' @export
-#'
+#' @importFrom stats fft
+#' @importFrom stats rnorm
 #' @examples
+#' eba.simdata(T=50000)
 eba.simdata <- function(T){
-
   #associated frequencies for DFT
   f <- seq(from=0,by=1/T,length.out=floor(T/2)+1);
   f <- c(f,rev(f[c(-1,-which(f==0.5))]));
