@@ -6,9 +6,9 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The R package “EBAtimeseries” provides functions for implementing
-empirical band analysis for non stationary time series, with methods for
-functional and multivariate cases. For reference, see the following.
+The R package “EFBA” provides functions for implementing empirical band
+analysis for non stationary time series, with methods for functional and
+multivariate cases. For reference, see the following.
 
 1: \[“Empirical Frequency Band Analysis of Nonstationary Time Series.”
 Bruce, Tang, Hall, Krafty (2020)\]
