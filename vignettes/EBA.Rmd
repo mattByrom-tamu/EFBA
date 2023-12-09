@@ -55,20 +55,22 @@ ebaout.bS$log;
 #3 partition points tested in total, 2 determined to be significant
 
 ##Plot multitaper spectral estimates along with estimated frequency partition points
-par(mfrow=c(3,1),oma=c(0,0,2,0),mar=c(4,4,1.5,2)+0.1);
+# Multitaper Spectrogram for White Noise
 image.plot(x=ebaout.wn$mtspec$t,y=ebaout.wn$mtspec$f,z=t(ebaout.wn$mtspec$mtspec), 
            axes = TRUE, col = inferno(256),zlim=c(0,10), 
            xlab='Time',ylab='Hz',xaxs="i"); 
 abline(h=ebaout.wn$part.final[c(-1,-length(ebaout.wn$part.final))],col='green');
+
+# linear
 image.plot(x=ebaout.bL$mtspec$t,y=ebaout.bL$mtspec$f,z=t(ebaout.bL$mtspec$mtspec), 
            axes = TRUE, col = inferno(256), zlim=c(0,10), 
            xlab='Time',ylab='Hz',xaxs="i"); 
 abline(h=ebaout.bL$part.final[c(-1,-length(ebaout.bL$part.final))],col='green');
+# Sinusoidal
 image.plot(x=ebaout.bS$mtspec$t,y=ebaout.bS$mtspec$f,z=t(ebaout.bS$mtspec$mtspec), 
            axes = TRUE, col = inferno(256), zlim=c(0,10), 
            xlab='Time',ylab='Hz',xaxs="i"); 
 abline(h=ebaout.bS$part.final[c(-1,-length(ebaout.bS$part.final))],col='green');
-mtext("Multitaper Spectrogram for White Noise(top) Linear(middle) and Sinusoidal(bottom)", outer = TRUE, cex = 1);
 
 ##Check p-values for flat spectrum for each segment
 ebaout.wn$flat; 
