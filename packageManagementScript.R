@@ -94,5 +94,9 @@ devtools::document()
 
 # rmd readme document
 usethis::use_readme_rmd()
+devtools::build_readme()
 
 load_all()
+
+# build EBA vignette
+usethis::use_vignette("EBA")
