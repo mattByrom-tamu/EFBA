@@ -69,13 +69,13 @@ usethis::use_gpl3_license()
 
 # package dependencies for EBA
 usethis::use_package("momentchi2", type = "Imports")
-usethis::use_package("fields", type = "Imports")
-usethis::use_package("viridis", type = "Imports")
+usethis::use_package("fields", type = "suggests")
+usethis::use_package("viridis", type = "suggests")
 usethis::use_package("signal", type = "Imports")
-usethis::use_package("fossil", type = "Imports")
-usethis::use_package("compositions", type = "Imports")
+usethis::use_package("fossil", type = "suggests")
+usethis::use_package("compositions", type = "suggests")
 usethis::use_package("stats", type = "Imports")
-devtools::install_github("mattByrom-tamu/EFBA")
+# devtools::install_github("mattByrom-tamu/EFBA")
 
 vignette("rd", package = "roxygen2")
 
