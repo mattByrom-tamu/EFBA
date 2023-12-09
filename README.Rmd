@@ -1,0 +1,63 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# EFBA
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The R package "EBAtimeseries" provides functions for implementing empirical band analysis for non stationary time series, with methods for functional and multivariate cases. For reference, see the following.
+
+1: ["Empirical Frequency Band Analysis of Nonstationary Time Series." Bruce, Tang, Hall, Krafty (2020)] (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8186526/) 
+
+2: ["Adaptive Frequency Band Analysis for Functional Time Series." Bagchi, Bruce (2021)] (https://arxiv.org/abs/2102.01784) 
+
+3: ["Frequency Band Analysis of Nonstationary Multivariate Time Series." Sundararajan, Bruce (2023)] (https://arxiv.org/abs/2301.03664/)
+
+To Cite:
+
+## Installation
+
+You can install the development version of EFBA from [GitHub](https://github.com/) at: mattByrom-tamu/EFBA
+
+``` r
+# install.packages("devtools")
+devtools::install_github("mattByrom-tamu/EFBA")
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r example}
+library(EFBA)
+## basic example code
+```
+
+What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+
+```{r cars}
+summary(cars)
+```
+
+You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
+
+You can also embed plots, for example:
+
+```{r pressure, echo = FALSE}
+plot(pressure)
+```
+
+In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
