@@ -26,8 +26,6 @@ The R package "EBAtimeseries" provides functions for implementing empirical band
 
 3: ["Frequency Band Analysis of Nonstationary Multivariate Time Series." Sundararajan, Bruce (2023)] (https://arxiv.org/abs/2301.03664/)
 
-To Cite:
-
 ## Installation
 
 You can install the development version of EFBA from [GitHub](https://github.com/) at: mattByrom-tamu/EFBA
@@ -39,11 +37,40 @@ devtools::install_github("mattByrom-tamu/EFBA")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+Empirical Band Analysis using the FRESH statistic for linear time-varying dynamics (3 bands). Examples for a white noise (1 band) and sinusoidal time-varying dynamics (3 bands) can be found in the EBA vignette 
 
 ```{r example}
 library(EFBA)
-## basic example code
+library(fields)
+
+###Simulate data for all simulated data settings described in paper
+set.seed(823819); #if you change the seed, you will get different results
+T <- 50000; #total length of time series 
+X <- eba.simdata(T=T);
+
+###Run search algorithm using FRESH statistic
+##Input parameters
+N <- 500; #number of observations per approximately stationary block
+K <- 15; #number of tapers to use in multitaper spectral estimator
+alpha <- 0.05; #significance level to use for testing partition points using FRESH statistic
+std <- FALSE; #should the variance of each stationary block be set to one across all blocks? (TRUE or FALSE)
+
+# Call the search algorithm using the FRESH statistic 
+ebaout.bL <- eba.search(X=X$bL,N=N,K=K,std=std,alpha=alpha);
+
+##See final partition of frequency space
+ebaout.bL$part.final; #three bands estimated
+
+ebaout.bL$log; #3 partition points tested in total, 2 determined to be significant
+
+image.plot(x=ebaout.bL$mtspec$t,y=ebaout.bL$mtspec$f,z=t(ebaout.bL$mtspec$mtspec), 
+           axes = TRUE, col = inferno(256), zlim=c(0,10), 
+           xlab='Time',ylab='Hz',xaxs="i"); 
+abline(h=ebaout.bL$part.final[c(-1,-length(ebaout.bL$part.final))],col='green');
+
+ebaout.bL$flat 
+#p-value for band (0.150,0.344] fails to reject hypothesis of flat spectrum
+#p-values for other frequency bands reject flat spectrum hypothesis
 ```
 
 What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
