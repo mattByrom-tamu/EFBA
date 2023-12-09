@@ -24,8 +24,7 @@ library(ggplot2)
 
 # ignored files
 use_build_ignore(c("packageManagementScript.R"))
-use_build_ignore(c("EBA_functions.R"))
-
+use_build_ignore(c("mEBA_function.R"))
 
 # add author and manager
 
@@ -87,7 +86,7 @@ exists("eba.search", where = globalenv(), inherits = FALSE) # returned false so 
 devtools::check() # no errors currently
 
 # add C++, rcpp, and armadillo to code base
-usethis::use_rcpp_armadillo()
+usethis::use_rcpp()
 
 # update documentation, have to delete namespace first sometimes
 devtools::document()
@@ -100,3 +99,7 @@ load_all()
 
 # build EBA vignette
 usethis::use_vignette("EBA")
+
+# test classes for EBA
+usethis::use_testthat()
+usethis::use_test("eba.search.R")
