@@ -29,6 +29,8 @@ You can install the development version of EFBA from
 ``` r
 # install.packages("devtools")
 devtools::install_github("mattByrom-tamu/EFBA")
+# or
+devtools::install_github("mattByrom-tamu/EFBA", build_vignettes=TRUE)
 ```
 
 ## Example
