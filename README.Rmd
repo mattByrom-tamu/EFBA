@@ -28,7 +28,7 @@ The R package "EBAtimeseries" provides functions for implementing empirical band
 
 ## Installation
 
-You can install the development version of EFBA from [GitHub](https://github.com/) at: mattByrom-tamu/EFBA
+You can install the development version of EFBA from [GitHub](https://github.com/mattByrom-tamu/EFBA)
 
 ``` r
 # install.packages("devtools")

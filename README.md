@@ -24,7 +24,7 @@ Series.” Sundararajan, Bruce (2023)\]
 ## Installation
 
 You can install the development version of EFBA from
-[GitHub](https://github.com/) at: mattByrom-tamu/EFBA
+[GitHub](https://github.com/mattByrom-tamu/EFBA)
 
 ``` r
 # install.packages("devtools")
