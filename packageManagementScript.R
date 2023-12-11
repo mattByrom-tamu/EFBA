@@ -110,3 +110,7 @@ typeof(y)
 
 ? eba.search
 ? eba.simdata
+
+# set up continous integration
+usethis::use_github_action()
+

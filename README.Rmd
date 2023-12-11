@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # EFBA
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/mattByrom-tamu/EFBA/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mattByrom-tamu/EFBA/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The R package "EFBA" provides functions for implementing empirical band analysis for non stationary time series, with methods for functional and multivariate cases. For reference, see the following.
