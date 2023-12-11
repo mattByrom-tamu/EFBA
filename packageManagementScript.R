@@ -103,3 +103,10 @@ usethis::use_vignette("EBA")
 # test classes for EBA
 usethis::use_testthat()
 usethis::use_test("eba.search.R")
+
+x = 1
+y = 2
+typeof(y)
+
+? eba.search
+? eba.simdata

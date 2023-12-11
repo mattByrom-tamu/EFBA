@@ -2,18 +2,24 @@
 % Please edit documentation in R/EBA_functions.R
 \name{eba.simdata}
 \alias{eba.simdata}
-\title{Function to simulate time series data with length 'T'}
+\title{Simulate time series data}
 \usage{
 eba.simdata(T)
 }
 \arguments{
-\item{T}{total length of intended time series}
+\item{T}{numeric/integer with total length of intended time series}
 }
 \value{
-List of 3 frequency series; wn (white noise), bl, and bs (time series processes in the data, 3 different settings in the paper)
+List of 3 frequency series
 }
 \description{
-Function to simulate time series data with length 'T'
+The function eba.simdata will simulate a time series of the specified length 'T'.
+}
+\details{
+Increasing T will increase the length of the time series.Bellow are brief explanations of each of the returned time series. \cr \cr
+wn: white noise, random normal distribution with mean of 0 and var = 1 \cr \cr
+bl: linear example used in paper \cr \cr
+bs: sinusoidal example used in paper \cr \cr
 }
 \examples{
 eba.simdata(T=50000)
