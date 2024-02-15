@@ -112,3 +112,5 @@ usethis::use_github_action()
 usethis::use_rcpp_armadillo()
 # update documentation, have to delete namespace first sometimes
 devtools::document()
+
+# try no reclone
