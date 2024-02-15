@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 Description: Simulates data corresponding to three time series processes described in the paper (1: white noise (1 band), 2: linear time-varying dynamics (3 bands), 3: sinusoidal time-varying dynamics (3 bands)), conducts an empirical frequency band analysis using the FRESH statistic and search algorithm, and produces summary tables and plots of the results.
 
-```{r setup}
+```{r EBA}
 library(EFBA)
 library(fields)
 
