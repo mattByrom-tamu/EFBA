@@ -230,6 +230,13 @@ eba.b <- function(X.dm,f,startf,endf,covg,alpha) {
 #'
 #' @examples used in eba.search to get tests for if spectra have any time varying behavior. Low p value indicates low time varying behavior.
 eba.flat <- function(f,partfinal,ghat,covg){
+
+  #f - Fourier frequencies
+  #partfinal - final partition using EBA algorithm
+  #mtspec - multitaper spectral estimates (N x B)
+  #ghat - demeaned multitaper spectral estimates (N x B)
+  #covg - estimated covariance of demeaned multitaper spectral estimates for b=1,...B (N x N x B)
+
   #calculate test statistic for each band
   partidx <- which(f %in% partfinal[-1]); #indices for frequency partition
   nf <- diff(c(0,partidx)); #number of frequencies in each band
