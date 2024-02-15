@@ -2,3 +2,6 @@
 ^\.Rproj\.user$
 ^packageManagementScript\.R$
 ^LICENSE\.md$
+^mEBA_function\.R$
+^\.github$
+^README\.Rmd$
