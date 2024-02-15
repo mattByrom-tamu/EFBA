@@ -2,6 +2,7 @@
 ^\.Rproj\.user$
 ^packageManagementScript\.R$
 ^LICENSE\.md$
-^mEBA_function\.R$
 ^\.github$
 ^README\.Rmd$
+^mEBA_functions\.R$
+^mEBA_Rfunctions\.R$
