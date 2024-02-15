@@ -24,7 +24,7 @@ library(ggplot2)
 
 # ignored files
 use_build_ignore(c("packageManagementScript.R"))
-use_build_ignore(c("mEBA_function.R"))
+use_build_ignore(c("mEBA_Rfunctions.R"))
 
 # add author and manager
 
@@ -71,7 +71,7 @@ usethis::use_gpl3_license()
 usethis::use_package("momentchi2", type = "Imports")
 usethis::use_package("fields", type = "suggests")
 usethis::use_package("viridis", type = "suggests")
-usethis::use_package("signal", type = "Imports")
+#usethis::use_package("signal", type = "Imports")
 usethis::use_package("fossil", type = "suggests")
 usethis::use_package("compositions", type = "suggests")
 usethis::use_package("stats", type = "Imports")
