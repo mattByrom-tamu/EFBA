@@ -298,7 +298,7 @@ eba.flat <- function(f,partfinal,ghat,covg){
 eba.search <- function(X,N,K,std,alpha){
 
   #check function arguments and specify defaults
-  if(class(X)!='numeric'){
+  if(is.numeric(X) !='TRUE'){
     stop("X must be a numeric vector.")
   }else if(length(X) == 0){
     stop("X must have length greater than zero.")
@@ -311,7 +311,7 @@ eba.search <- function(X,N,K,std,alpha){
     message(paste("Note: N set to ",N,".",sep=""));
   }else if(any(!is.finite(N))){
     stop("N cannot be non-finite or missing.")
-  }else if(!(class(N) == 'numeric' && length(N)==1 && N%%1==0 && N>0)){
+  }else if(!(is.numeric(N) == 'TRUE' && length(N)==1 && N%%1==0 && N>0)){
     stop("N must be an integer greater than zero.")
   }else if(N > length(X)){
     stop("N must be smaller than length of X.")
@@ -324,7 +324,7 @@ eba.search <- function(X,N,K,std,alpha){
     message(paste("Note: K set to ",K,".",sep=""));
   }else if(any(!is.finite(K))){
     stop("K cannot be non-finite or missing.")
-  }else if(!(class(K) == 'numeric' && length(K)==1 && K%%1==0 && K>0)){
+  }else if(!(is.numeric(K) == 'TRUE' && length(K)==1 && K%%1==0 && K>0)){
     stop("K must be an integer greater than zero.");
   }else if(K > floor(2*N*.15-1)){
     stop("K should be smaller for good frequency resolution.  K=floor(2*N*bandwidth-1) is recommended.")
