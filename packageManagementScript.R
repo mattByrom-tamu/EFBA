@@ -85,12 +85,6 @@ devtools::load_all()
 exists("eba.search", where = globalenv(), inherits = FALSE) # returned false so looks like it's working
 devtools::check() # no errors currently
 
-# add C++, rcpp, and armadillo to code base
-usethis::use_rcpp()
-
-# update documentation, have to delete namespace first sometimes
-devtools::document()
-
 # rmd readme document
 usethis::use_readme_rmd()
 devtools::build_readme()
@@ -114,3 +108,7 @@ typeof(y)
 # set up continous integration
 usethis::use_github_action()
 
+# add C++, rcpp, and armadillo to code base
+usethis::use_rcpp_armadillo()
+# update documentation, have to delete namespace first sometimes
+devtools::document()
