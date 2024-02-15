@@ -181,7 +181,7 @@ eba.b <- function(X.dm,f,startf,endf,covg,alpha) {
   #clusterExport(c1, c('sw','sigma2','Qb'), envir=environment())
   pval.b <- sapply(X=1:length(Qb),FUN=function(x) 1-sw(sigma2[,x],Qb[x]));
   #x11();plot(f[(startf+1):endf],pval.b,type="l",xlab="Hz",ylab="p-value",mgp=c(3,1,0));
-
+  names(pval.b) <- f[(startf + 1):endf]
   #Hochberg step up procedure for determining significance
   pval.ord <- sort(pval.b);
   pval.th <- alpha/((endf-startf)-(1:(endf-startf))+1);
@@ -208,10 +208,10 @@ eba.b <- function(X.dm,f,startf,endf,covg,alpha) {
   }
 
   bhat <- startf+pval.idx;
-  names(pval.b) <- f[(startf + 1):endf]
+
   #output results for bhat
   out[c('bhat.idx','bhat','bhat.Q','bhat.pval','bhat.pval.th','bhat.sig')] <- c(bhat,f[bhat],Qb[pval.idx],
-                                                                                pval.b[pval.idx],pval.th[which(pval.ord==pval.b[pval.idx])],as.logical(b.sig.ind));
+                                                                                pval.b[pval.idx],pval.th[which(pval.ord==pval.b[pval.idx])[1]],as.logical(b.sig.ind));
   list.out <- list("out" = out, "pvals" = pval.b)
   return(list.out);
 
