@@ -110,6 +110,8 @@ usethis::use_github_action()
 
 # add C++, rcpp, and armadillo to code base
 usethis::use_rcpp_armadillo()
+### try without armadillo()
+usethis::use_rcpp()
 # update documentation, have to delete namespace first sometimes
 devtools::document()
 
