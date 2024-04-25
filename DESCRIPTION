@@ -15,7 +15,8 @@ Authors@R: c(
 Imports: 
     momentchi2,
     Rcpp,
-    stats
+    stats,
+    RcppArmadillo
 RoxygenNote: 7.2.3
 Suggests: 
     compositions,
@@ -28,5 +29,6 @@ Suggests:
     viridis
 VignetteBuilder: knitr
 LinkingTo: 
-    Rcpp
+    Rcpp,
+    RcppArmadillo
 Config/testthat/edition: 3
