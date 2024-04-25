@@ -1,0 +1,33 @@
+Package: EFBA
+Type: Package
+Title: Empirical Frequency Band Analysis for Time Series
+Version: 0.1.0
+Description: Implements Empirical Frequency Band Analysis for Time Series data. Different functions are provided for the following types of time series data; nonstationary,functional, and multivariate. The publications for these metrics can be found in the README.md under citations.  
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+Authors@R: c(
+    person("Scott", "Bruce", , "sabruce@tamu.edu", role = "aut"),
+    person("Matt", "Byrom", , "matthew.james.byrom@tamu.edu", role = "cre"),
+    person("Dylan", "Ward", role = "ctb"),
+    person("Mohit", "Chhaparia", role = "ctb")
+  )
+Imports: 
+    momentchi2,
+    Rcpp,
+    stats
+RoxygenNote: 7.2.3
+Suggests: 
+    compositions,
+    fields,
+    fossil,
+    knitr,
+    rmarkdown,
+    signal,
+    testthat (>= 3.0.0),
+    viridis
+VignetteBuilder: knitr
+LinkingTo: 
+    Rcpp,
+    RcppArmadillo
+Config/testthat/edition: 3
