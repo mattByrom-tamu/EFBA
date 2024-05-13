@@ -1,3 +1,7 @@
+#' @export
+#' @importFrom fda create.bspline.basis
+#' @importFrom fda eval.basis
+#' @importFrom stats rnorm
 #function to simulate functional white noise data
 fws.sim <- function(nb=15,gsz=20,Ts,seed){
 
@@ -21,12 +25,15 @@ fws.sim <- function(nb=15,gsz=20,Ts,seed){
   return(fwn);
 }
 
+#' @export
+#' @importFrom stats fft
+#' @importFrom stats rnorm
 #function to simulate nonstationary 3 band linear data
 f3bL.sim <- function(nb,gsz,Ts,seed){
 
   set.seed(seed)
   seed2<-sample(1:600,3);
-  
+
   #low frequencies
   X <- fws.sim(nb=nb,gsz=gsz,T=Ts,seed=seed2[1]);
   Ts <- nrow(X);
@@ -76,12 +83,16 @@ f3bL.sim <- function(nb,gsz,Ts,seed){
   return(X.3bL)
 }
 
+
+#' @export
+#' @importFrom stats fft
+#' @importFrom stats rnorm
 #function to simulate nonstationary 3 band sinusoidal data
 f3bS.sim <- function(nb,gsz,Ts,seed){
-  
+
   set.seed(seed)
   seed2<-sample(1:600,4);
-  
+
   #low frequencies
   X <- fws.sim(nb=nb,gsz=gsz,T=Ts,seed=seed2[1]);
   Ts <- nrow(X);
@@ -91,10 +102,10 @@ f3bS.sim <- function(nb,gsz,Ts,seed){
   dft <- mvfft(X)/Ts;
   dft[which(f>0.15),] <- 0;
   fwn1.lf <- Re(mvfft(dft,inverse=TRUE));
-  
+
   fwn1.lf <- apply(fwn1.lf,2,function(x) x/sd(x));
   # fwn1.lf <- fwn1.lf/sd(fwn1.lf);
-  
+
   #middle frequencies
   X <- fws.sim(nb=nb,gsz=gsz,T=Ts,seed=seed2[2]);
   Ts <- nrow(X);
@@ -104,10 +115,10 @@ f3bS.sim <- function(nb,gsz,Ts,seed){
   dft <- mvfft(X)/Ts;
   dft[which(f<=0.15 | f>0.35),] <- 0;
   fwn1.mf <- Re(mvfft(dft,inverse=TRUE));
-  
+
   fwn1.mf <- apply(fwn1.mf,2,function(x) x/sd(x));
   # fwn1.mf <- fwn1.mf/sd(fwn1.mf);
-  
+
   #high frequencies
   X <- fws.sim(nb=nb,gsz=gsz,T=Ts,seed=seed2[3]);
   Ts <- nrow(X);
@@ -117,20 +128,21 @@ f3bS.sim <- function(nb,gsz,Ts,seed){
   dft <- mvfft(X)/Ts;
   dft[which(f<=0.35),] <- 0;
   fwn1.hf <- Re(mvfft(dft,inverse=TRUE));
-  
+
   fwn1.hf <- apply(fwn1.hf,2,function(x) x/sd(x));
   # fwn1.hf <- fwn1.hf/sd(fwn1.hf);
-  
+
   #nonstationary 3 segments linear
   #combine
   coef1 <- sqrt(9)*sin(2*pi*seq(0,1,length=Ts));
   coef2 <- sqrt(9)*cos(2*pi*seq(0,1,length=Ts));
-  coef3 <- sqrt(9)*cos(4*pi*seq(0,1,length=Ts)); 
+  coef3 <- sqrt(9)*cos(4*pi*seq(0,1,length=Ts));
   X.3bS <- coef1*fwn1.lf*sqrt(.3) + coef2*fwn1.mf*sqrt(.4) + coef3*fwn1.hf*sqrt(.3)+fws.sim(nb=nb,gsz=gsz,T=Ts,seed=seed2[4]);
-  
+
   return(X.3bS)
 }
 
+#' @export
 #function to run iterative eba algorithm
 fEBA.wrapper <- function(X,Rsel,K,N,ndraw,alpha,std,blockdiag,dcap=10^10){
 
