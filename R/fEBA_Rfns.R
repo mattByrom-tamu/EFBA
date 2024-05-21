@@ -150,7 +150,7 @@ fEBA.wrapper <- function(X,Rsel,K,N,ndraw,alpha,std,blockdiag,dcap=10^10){
   R<-min(ncol(X),Rsel);
 
   #multitaper estimator of power spectrum
-  pse <- fhat(X,N,K,Rsel,std);
+  pse <- fhat_pmt(X,N,K,Rsel,std);
   B <- dim(pse)[3];
   dimnames(pse) <- list(freq,apply(expand.grid(1:R,1:R),1,paste,collapse = "-"),1:B);
 
@@ -180,7 +180,7 @@ fEBA.wrapper <- function(X,Rsel,K,N,ndraw,alpha,std,blockdiag,dcap=10^10){
       #identify changepoint candidates (Cpp functions)
       startf <- f.part[idx]+bw+dctr*dcap;
       endf <- min(f.part[idx+1]-bw,startf+dcap);
-      tmp <- fEBA(fhat=pse[startf:endf,,,drop=FALSE],ghat=gpse[startf:endf,,,drop=FALSE],
+      tmp <- fEBA(fhat_pmt=pse[startf:endf,,,drop=FALSE],ghat=gpse[startf:endf,,,drop=FALSE],
                   K,ndraw,alpha,blockdiag)
 
       #reformat and add labeling
@@ -235,6 +235,6 @@ fEBA.wrapper <- function(X,Rsel,K,N,ndraw,alpha,std,blockdiag,dcap=10^10){
   #compile results
   rownames(sumfile) <- 1:nrow(sumfile);
   results <- list(part.final=freq[f.part],part.list=partlst,
-                  summary=sumfile,fhat=pse,ghat=gpse,log=logfile);
+                  summary=sumfile,fhat_pmt=pse,ghat=gpse,log=logfile);
   return(results)
 }

@@ -2,20 +2,21 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #' @export
-fhat <- function(X, N, K, Rsel, stdz) {
-    .Call('_EFBA_fhat', PACKAGE = 'EFBA', X, N, K, Rsel, stdz)
+fhat_pmt <- function(X, N, K, Rsel, stdz) {
+    .Call('_EFBA_fhat_pmt', PACKAGE = 'EFBA', X, N, K, Rsel, stdz)
 }
 
-ghat <- function(fhat) {
-    .Call('_EFBA_ghat', PACKAGE = 'EFBA', fhat)
+#' @export
+ghat <- function(fhat_pmt) {
+    .Call('_EFBA_ghat', PACKAGE = 'EFBA', fhat_pmt)
 }
 
-Qpval <- function(fhat, K, ndraw, Qts, Qint, blockdiag) {
-    .Call('_EFBA_Qpval', PACKAGE = 'EFBA', fhat, K, ndraw, Qts, Qint, blockdiag)
+Qpval <- function(fhat_pmt, K, ndraw, Qts, Qint, blockdiag) {
+    .Call('_EFBA_Qpval', PACKAGE = 'EFBA', fhat_pmt, K, ndraw, Qts, Qint, blockdiag)
 }
 
-fEBA <- function(fhat, ghat, K, ndraw, alpha, blockdiag) {
-    .Call('_EFBA_fEBA', PACKAGE = 'EFBA', fhat, ghat, K, ndraw, alpha, blockdiag)
+fEBA <- function(fhat_pmt, ghat, K, ndraw, alpha, blockdiag) {
+    .Call('_EFBA_fEBA', PACKAGE = 'EFBA', fhat_pmt, ghat, K, ndraw, alpha, blockdiag)
 }
 
 rcpp_hello <- function() {
