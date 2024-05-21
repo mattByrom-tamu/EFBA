@@ -24,7 +24,7 @@ using namespace std;
 
 //' @export
 // [[Rcpp::export]]
-arma::cx_cube fhat(arma::mat X, int N, int K, int Rsel, bool stdz){
+arma::cx_cube fhat_pmt(arma::mat X, int N, int K, int Rsel, bool stdz){
 
   //reduce components of X if Rsel<R
   int Rcurr=X.n_cols;
@@ -112,14 +112,15 @@ arma::cx_cube fhat(arma::mat X, int N, int K, int Rsel, bool stdz){
   return mtspec;
 }
 
+//' @export
 // [[Rcpp::export]]
-arma::cx_cube ghat(arma::cx_cube fhat){
+arma::cx_cube ghat(arma::cx_cube fhat_pmt){
 
-  arma::cx_cube ghat=fhat;
-  arma::cx_mat tmp(fhat.n_rows,fhat.n_cols);
+  arma::cx_cube ghat=fhat_pmt;
+  arma::cx_mat tmp(fhat_pmt.n_rows,fhat_pmt.n_cols);
 
   // demeaned multitaper estimator (g)
-  tmp = mean(fhat,2);
+  tmp = mean(fhat_pmt,2);
   ghat.each_slice() -= tmp;
   return ghat;
 }
@@ -159,49 +160,49 @@ arma::vec Qintfn(arma::mat Qts){
 
 }
 
-std::complex<double> covghat(arma::cx_cube fhat,
+std::complex<double> covghat(arma::cx_cube fhat_pmt,
                              int f1,int f2,
                              int b1, int b2,
                              int tau1,int sig1,
                              int tau2,int sig2){
 
-  int R=sqrt(fhat.n_cols);
-  int Bi=fhat.n_slices;
-  std::complex<double> Bc=fhat.n_slices;
+  int R=sqrt(fhat_pmt.n_cols);
+  int Bi=fhat_pmt.n_slices;
+  std::complex<double> Bc=fhat_pmt.n_slices;
   std::complex<double> cghat;
   std::complex<double> one(1,0);
   std::complex<double> negone(-1,0);
   std::complex<double> two(2,0);
 
   if (b1==b2){
-    cghat=(one-(two/Bc))*(fhat(f1,tau1+R*tau2,b1)*fhat(f2,sig1+R*sig2,b1)+
-      fhat(f1,tau1+R*sig2,b1)*fhat(f2,tau2+R*sig1,b1))+
-      (one/pow(Bc,2))*accu(fhat.subcube(f1,tau1+R*tau2,0,f1,tau1+R*tau2,Bi-1)%
-      fhat.subcube(f2,sig1+R*sig2,0,f2,sig1+R*sig2,Bi-1)+
-      fhat.subcube(f1,tau1+R*sig2,0,f1,tau1+R*sig2,Bi-1)%
-      fhat.subcube(f2,tau2+R*sig1,0,f2,tau2+R*sig1,Bi-1));
+    cghat=(one-(two/Bc))*(fhat_pmt(f1,tau1+R*tau2,b1)*fhat_pmt(f2,sig1+R*sig2,b1)+
+      fhat_pmt(f1,tau1+R*sig2,b1)*fhat_pmt(f2,tau2+R*sig1,b1))+
+      (one/pow(Bc,2))*accu(fhat_pmt.subcube(f1,tau1+R*tau2,0,f1,tau1+R*tau2,Bi-1)%
+      fhat_pmt.subcube(f2,sig1+R*sig2,0,f2,sig1+R*sig2,Bi-1)+
+      fhat_pmt.subcube(f1,tau1+R*sig2,0,f1,tau1+R*sig2,Bi-1)%
+      fhat_pmt.subcube(f2,tau2+R*sig1,0,f2,tau2+R*sig1,Bi-1));
 
   } else{
-    cghat=(negone/Bc)*(fhat(f1,tau1+R*tau2,b1)*fhat(f2,sig1+R*sig2,b1)+
-      fhat(f1,tau1+R*sig2,b1)*fhat(f2,tau2+R*sig1,b1))+
-      (negone/Bc)*(fhat(f1,tau1+R*tau2,b2)*fhat(f2,sig1+R*sig2,b2)+
-      fhat(f1,tau1+R*sig2,b2)*fhat(f2,tau2+R*sig1,b2))+
-      (one/pow(Bc,2))*accu(fhat.subcube(f1,tau1+R*tau2,0,f1,tau1+R*tau2,Bi-1)%
-      fhat.subcube(f2,sig1+R*sig2,0,f2,sig1+R*sig2,Bi-1)+
-      fhat.subcube(f1,tau1+R*sig2,0,f1,tau1+R*sig2,Bi-1)%
-      fhat.subcube(f2,tau2+R*sig1,0,f2,tau2+R*sig1,Bi-1));
+    cghat=(negone/Bc)*(fhat_pmt(f1,tau1+R*tau2,b1)*fhat_pmt(f2,sig1+R*sig2,b1)+
+      fhat_pmt(f1,tau1+R*sig2,b1)*fhat_pmt(f2,tau2+R*sig1,b1))+
+      (negone/Bc)*(fhat_pmt(f1,tau1+R*tau2,b2)*fhat_pmt(f2,sig1+R*sig2,b2)+
+      fhat_pmt(f1,tau1+R*sig2,b2)*fhat_pmt(f2,tau2+R*sig1,b2))+
+      (one/pow(Bc,2))*accu(fhat_pmt.subcube(f1,tau1+R*tau2,0,f1,tau1+R*tau2,Bi-1)%
+      fhat_pmt.subcube(f2,sig1+R*sig2,0,f2,sig1+R*sig2,Bi-1)+
+      fhat_pmt.subcube(f1,tau1+R*sig2,0,f1,tau1+R*sig2,Bi-1)%
+      fhat_pmt.subcube(f2,tau2+R*sig1,0,f2,tau2+R*sig1,Bi-1));
   }
 
   return(cghat);
 }
 
-std::complex<double> covGnull(arma::cx_cube fhat,
+std::complex<double> covGnull(arma::cx_cube fhat_pmt,
                               int b1, int b2,
                               int tau1,int sig1,
                               int tau2,int sig2){
 
-  int di=fhat.n_rows;
-  std::complex<double> dc=fhat.n_rows;
+  int di=fhat_pmt.n_rows;
+  std::complex<double> dc=fhat_pmt.n_rows;
   std::complex<double> one(1,0);
   std::complex<double> negone(-1,0);
   std::complex<double> covGnullout;
@@ -211,10 +212,10 @@ std::complex<double> covGnull(arma::cx_cube fhat,
   arma::cx_mat sumf1f2mat(di-1,di-1);
 
   for (int i=0;i<(di-1);i++){
-    sumb1b2vec(i)=covghat(fhat,di-1,i,b1,b2,tau1,sig1,tau2,sig2);
-    sumb2b1vec(i)=covghat(fhat,di-1,i,b2,b1,tau2,sig2,tau1,sig1);
+    sumb1b2vec(i)=covghat(fhat_pmt,di-1,i,b1,b2,tau1,sig1,tau2,sig2);
+    sumb2b1vec(i)=covghat(fhat_pmt,di-1,i,b2,b1,tau2,sig2,tau1,sig1);
     for (int j=0;j<(di-1);j++){
-      sumf1f2mat(i,j)=covghat(fhat,i,j,b1,b2,tau1,sig1,tau2,sig2);
+      sumf1f2mat(i,j)=covghat(fhat_pmt,i,j,b1,b2,tau1,sig1,tau2,sig2);
     }
   }
 
@@ -222,7 +223,7 @@ std::complex<double> covGnull(arma::cx_cube fhat,
   std::complex<double> sumb2b1=sum(sumb2b1vec);
   std::complex<double> sumf1f2=accu(sumf1f2mat);
 
-  covGnullout=covghat(fhat,di-1,di-1,b1,b2,tau1,sig1,tau2,sig2)+
+  covGnullout=covghat(fhat_pmt,di-1,di-1,b1,b2,tau1,sig1,tau2,sig2)+
     (one/pow(dc,2))*sumf1f2+(negone/dc)*sumb1b2+(negone/dc)*sumb2b1;
 
   return covGnullout;
@@ -320,11 +321,11 @@ arma::cx_mat rcmvnormRcpp(int n, arma::cx_mat mean, arma::cx_mat sigma){
 }
 
 // [[Rcpp::export]]
-arma::vec Qpval(arma::cx_cube fhat, int K,int ndraw, arma::vec Qts, double Qint, bool blockdiag){
+arma::vec Qpval(arma::cx_cube fhat_pmt, int K,int ndraw, arma::vec Qts, double Qint, bool blockdiag){
 
   //initialization
-  int R=sqrt(fhat.n_cols);
-  int B=fhat.n_slices;
+  int R=sqrt(fhat_pmt.n_cols);
+  int B=fhat_pmt.n_slices;
 
   std::complex<double> two(2,0);
   arma::cx_mat gpout(ndraw,B*pow(R,2));
@@ -352,7 +353,7 @@ arma::vec Qpval(arma::cx_cube fhat, int K,int ndraw, arma::vec Qts, double Qint,
         for(int tau2=0;tau2<R;tau2++){
           for(int sig1=0;sig1<R;sig1++){
             for(int tau1=0;tau1<R;tau1++){
-              covGnullmat(ridx,cidx)=covGnull(fhat,b,b,tau1,sig1,tau2,sig2);
+              covGnullmat(ridx,cidx)=covGnull(fhat_pmt,b,b,tau1,sig1,tau2,sig2);
               ridx++;if(ridx==pow(R,2)){ridx=0;cidx++;}
             }
           }
@@ -388,7 +389,7 @@ arma::vec Qpval(arma::cx_cube fhat, int K,int ndraw, arma::vec Qts, double Qint,
           for(int b1=0;b1<B;b1++){
             for(int sig1=0;sig1<R;sig1++){
               for(int tau1=0;tau1<R;tau1++){
-                covGnullmat(ridx,cidx)=covGnull(fhat,b1,b2,tau1,sig1,tau2,sig2);
+                covGnullmat(ridx,cidx)=covGnull(fhat_pmt,b1,b2,tau1,sig1,tau2,sig2);
                 ridx++;if(ridx==B*pow(R,2)){ridx=0;cidx++;}
               }
             }
@@ -475,12 +476,12 @@ arma::vec hstepup(arma::vec pval,double alpha){
 }
 
 // [[Rcpp::export]]
-Rcpp::List fEBA(arma::cx_cube fhat, arma::cx_cube ghat,
+Rcpp::List fEBA(arma::cx_cube fhat_pmt, arma::cx_cube ghat,
                 int K, int ndraw, double alpha, bool blockdiag){
 
-  int Fs=fhat.n_rows;
-  int Rsq=fhat.n_cols;
-  int B=fhat.n_slices;
+  int Fs=fhat_pmt.n_rows;
+  int Rsq=fhat_pmt.n_cols;
+  int B=fhat_pmt.n_slices;
 
   //compute Q test statistics
   arma::mat Qts=Qtsfn(ghat);
@@ -490,7 +491,7 @@ Rcpp::List fEBA(arma::cx_cube fhat, arma::cx_cube ghat,
   arma::mat Qpv(Fs-1,Rsq+1,fill::zeros);
   for (int i=1;i<Fs;i++){
     Rcout <<  "Computing p-value for frequency " << i << " of " << Fs-1 <<"\r";
-    Qpv.row(i-1)=trans(Qpval(fhat.subcube(0,0,0,i,Rsq-1,B-1),K,ndraw,trans(Qts.row(i-1)),Qint(i-1),blockdiag));
+    Qpv.row(i-1)=trans(Qpval(fhat_pmt.subcube(0,0,0,i,Rsq-1,B-1),K,ndraw,trans(Qts.row(i-1)),Qint(i-1),blockdiag));
   }
 
   //Hochberg test across frequencies

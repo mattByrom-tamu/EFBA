@@ -11,9 +11,9 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// fhat
-arma::cx_cube fhat(arma::mat X, int N, int K, int Rsel, bool stdz);
-RcppExport SEXP _EFBA_fhat(SEXP XSEXP, SEXP NSEXP, SEXP KSEXP, SEXP RselSEXP, SEXP stdzSEXP) {
+// fhat_pmt
+arma::cx_cube fhat_pmt(arma::mat X, int N, int K, int Rsel, bool stdz);
+RcppExport SEXP _EFBA_fhat_pmt(SEXP XSEXP, SEXP NSEXP, SEXP KSEXP, SEXP RselSEXP, SEXP stdzSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -22,50 +22,50 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type K(KSEXP);
     Rcpp::traits::input_parameter< int >::type Rsel(RselSEXP);
     Rcpp::traits::input_parameter< bool >::type stdz(stdzSEXP);
-    rcpp_result_gen = Rcpp::wrap(fhat(X, N, K, Rsel, stdz));
+    rcpp_result_gen = Rcpp::wrap(fhat_pmt(X, N, K, Rsel, stdz));
     return rcpp_result_gen;
 END_RCPP
 }
 // ghat
-arma::cx_cube ghat(arma::cx_cube fhat);
-RcppExport SEXP _EFBA_ghat(SEXP fhatSEXP) {
+arma::cx_cube ghat(arma::cx_cube fhat_pmt);
+RcppExport SEXP _EFBA_ghat(SEXP fhat_pmtSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::cx_cube >::type fhat(fhatSEXP);
-    rcpp_result_gen = Rcpp::wrap(ghat(fhat));
+    Rcpp::traits::input_parameter< arma::cx_cube >::type fhat_pmt(fhat_pmtSEXP);
+    rcpp_result_gen = Rcpp::wrap(ghat(fhat_pmt));
     return rcpp_result_gen;
 END_RCPP
 }
 // Qpval
-arma::vec Qpval(arma::cx_cube fhat, int K, int ndraw, arma::vec Qts, double Qint, bool blockdiag);
-RcppExport SEXP _EFBA_Qpval(SEXP fhatSEXP, SEXP KSEXP, SEXP ndrawSEXP, SEXP QtsSEXP, SEXP QintSEXP, SEXP blockdiagSEXP) {
+arma::vec Qpval(arma::cx_cube fhat_pmt, int K, int ndraw, arma::vec Qts, double Qint, bool blockdiag);
+RcppExport SEXP _EFBA_Qpval(SEXP fhat_pmtSEXP, SEXP KSEXP, SEXP ndrawSEXP, SEXP QtsSEXP, SEXP QintSEXP, SEXP blockdiagSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::cx_cube >::type fhat(fhatSEXP);
+    Rcpp::traits::input_parameter< arma::cx_cube >::type fhat_pmt(fhat_pmtSEXP);
     Rcpp::traits::input_parameter< int >::type K(KSEXP);
     Rcpp::traits::input_parameter< int >::type ndraw(ndrawSEXP);
     Rcpp::traits::input_parameter< arma::vec >::type Qts(QtsSEXP);
     Rcpp::traits::input_parameter< double >::type Qint(QintSEXP);
     Rcpp::traits::input_parameter< bool >::type blockdiag(blockdiagSEXP);
-    rcpp_result_gen = Rcpp::wrap(Qpval(fhat, K, ndraw, Qts, Qint, blockdiag));
+    rcpp_result_gen = Rcpp::wrap(Qpval(fhat_pmt, K, ndraw, Qts, Qint, blockdiag));
     return rcpp_result_gen;
 END_RCPP
 }
 // fEBA
-Rcpp::List fEBA(arma::cx_cube fhat, arma::cx_cube ghat, int K, int ndraw, double alpha, bool blockdiag);
-RcppExport SEXP _EFBA_fEBA(SEXP fhatSEXP, SEXP ghatSEXP, SEXP KSEXP, SEXP ndrawSEXP, SEXP alphaSEXP, SEXP blockdiagSEXP) {
+Rcpp::List fEBA(arma::cx_cube fhat_pmt, arma::cx_cube ghat, int K, int ndraw, double alpha, bool blockdiag);
+RcppExport SEXP _EFBA_fEBA(SEXP fhat_pmtSEXP, SEXP ghatSEXP, SEXP KSEXP, SEXP ndrawSEXP, SEXP alphaSEXP, SEXP blockdiagSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::cx_cube >::type fhat(fhatSEXP);
+    Rcpp::traits::input_parameter< arma::cx_cube >::type fhat_pmt(fhat_pmtSEXP);
     Rcpp::traits::input_parameter< arma::cx_cube >::type ghat(ghatSEXP);
     Rcpp::traits::input_parameter< int >::type K(KSEXP);
     Rcpp::traits::input_parameter< int >::type ndraw(ndrawSEXP);
     Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
     Rcpp::traits::input_parameter< bool >::type blockdiag(blockdiagSEXP);
-    rcpp_result_gen = Rcpp::wrap(fEBA(fhat, ghat, K, ndraw, alpha, blockdiag));
+    rcpp_result_gen = Rcpp::wrap(fEBA(fhat_pmt, ghat, K, ndraw, alpha, blockdiag));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -81,7 +81,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_EFBA_fhat", (DL_FUNC) &_EFBA_fhat, 5},
+    {"_EFBA_fhat_pmt", (DL_FUNC) &_EFBA_fhat_pmt, 5},
     {"_EFBA_ghat", (DL_FUNC) &_EFBA_ghat, 1},
     {"_EFBA_Qpval", (DL_FUNC) &_EFBA_Qpval, 6},
     {"_EFBA_fEBA", (DL_FUNC) &_EFBA_fEBA, 6},
