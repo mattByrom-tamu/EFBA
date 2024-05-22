@@ -11,6 +11,47 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// msboot
+Rcpp::List msboot(int nrep, arma::mat x, int Wsel, bool stdz, int ncore);
+RcppExport SEXP _EFBA_msboot(SEXP nrepSEXP, SEXP xSEXP, SEXP WselSEXP, SEXP stdzSEXP, SEXP ncoreSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nrep(nrepSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type x(xSEXP);
+    Rcpp::traits::input_parameter< int >::type Wsel(WselSEXP);
+    Rcpp::traits::input_parameter< bool >::type stdz(stdzSEXP);
+    Rcpp::traits::input_parameter< int >::type ncore(ncoreSEXP);
+    rcpp_result_gen = Rcpp::wrap(msboot(nrep, x, Wsel, stdz, ncore));
+    return rcpp_result_gen;
+END_RCPP
+}
+// tsbootH0
+arma::mat tsbootH0(arma::mat x, arma::mat rndraws, int ncore);
+RcppExport SEXP _EFBA_tsbootH0(SEXP xSEXP, SEXP rndrawsSEXP, SEXP ncoreSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type x(xSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type rndraws(rndrawsSEXP);
+    Rcpp::traits::input_parameter< int >::type ncore(ncoreSEXP);
+    rcpp_result_gen = Rcpp::wrap(tsbootH0(x, rndraws, ncore));
+    return rcpp_result_gen;
+END_RCPP
+}
+// fhat_lp
+arma::cx_cube fhat_lp(arma::mat X, int N, bool stdz);
+RcppExport SEXP _EFBA_fhat_lp(SEXP XSEXP, SEXP NSEXP, SEXP stdzSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type X(XSEXP);
+    Rcpp::traits::input_parameter< int >::type N(NSEXP);
+    Rcpp::traits::input_parameter< bool >::type stdz(stdzSEXP);
+    rcpp_result_gen = Rcpp::wrap(fhat_lp(X, N, stdz));
+    return rcpp_result_gen;
+END_RCPP
+}
 // fhat_pmt
 arma::cx_cube fhat_pmt(arma::mat X, int N, int K, int Rsel, bool stdz);
 RcppExport SEXP _EFBA_fhat_pmt(SEXP XSEXP, SEXP NSEXP, SEXP KSEXP, SEXP RselSEXP, SEXP stdzSEXP) {
@@ -81,6 +122,9 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_EFBA_msboot", (DL_FUNC) &_EFBA_msboot, 5},
+    {"_EFBA_tsbootH0", (DL_FUNC) &_EFBA_tsbootH0, 3},
+    {"_EFBA_fhat_lp", (DL_FUNC) &_EFBA_fhat_lp, 3},
     {"_EFBA_fhat_pmt", (DL_FUNC) &_EFBA_fhat_pmt, 5},
     {"_EFBA_ghat", (DL_FUNC) &_EFBA_ghat, 1},
     {"_EFBA_Qpval", (DL_FUNC) &_EFBA_Qpval, 6},
