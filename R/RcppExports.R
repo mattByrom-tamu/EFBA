@@ -2,6 +2,20 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #' @export
+msboot <- function(nrep, x, Wsel, stdz, ncore) {
+    .Call('_EFBA_msboot', PACKAGE = 'EFBA', nrep, x, Wsel, stdz, ncore)
+}
+
+tsbootH0 <- function(x, rndraws, ncore) {
+    .Call('_EFBA_tsbootH0', PACKAGE = 'EFBA', x, rndraws, ncore)
+}
+
+#' @export
+fhat_lp <- function(X, N, stdz) {
+    .Call('_EFBA_fhat_lp', PACKAGE = 'EFBA', X, N, stdz)
+}
+
+#' @export
 fhat_pmt <- function(X, N, K, Rsel, stdz) {
     .Call('_EFBA_fhat_pmt', PACKAGE = 'EFBA', X, N, K, Rsel, stdz)
 }
