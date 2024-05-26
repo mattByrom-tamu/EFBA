@@ -1,7 +1,7 @@
 
 #' @export
 #' @importFrom shinyjs useShinyjs
-runApp <- function(){
+launchApp <- function(){
   shinyjs::useShinyjs()
 
   shinyApp(ui = ui, server = server)
