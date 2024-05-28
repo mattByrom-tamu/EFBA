@@ -17,11 +17,19 @@ Imports:
     Rcpp,
     stats,
     fda,
+    shiny,
+    viridis,
+    grid,
+    gridExtra,
+    ggplot2,
+    shinyjs,
+    plotly,
     RcppArmadillo
+Depends:
+    fields
 RoxygenNote: 7.3.1
 Suggests: 
     compositions,
-    fields,
     fossil,
     knitr,
     rmarkdown,
