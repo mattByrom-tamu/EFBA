@@ -13,6 +13,19 @@ Authors@R: c(
     person("Mohit", "Chhaparia", role = "ctb")
   )
 Imports:
+    fields,
+    momentchi2,
+    Rcpp,
+    stats,
+    fda,
+    shiny,
+    viridis,
+    grid,
+    gridExtra,
+    ggplot2,
+    shinyjs,
+    plotly,
+    signal,
     RcppArmadillo
 Depends:
     fields,
