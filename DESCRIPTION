@@ -12,7 +12,8 @@ Authors@R: c(
     person("Dylan", "Ward", role = "ctb"),
     person("Mohit", "Chhaparia", role = "ctb")
   )
-
+Imports:
+    RcppArmadillo
 Depends:
     fields,
     momentchi2,
