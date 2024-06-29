@@ -32,8 +32,6 @@ Upon opening the application, the user will see the above screenshot. As shown a
 
 # File Upload
 
-Note: Within the FrequencyBandAnalysis folder, there is a subfolder entitled "Sample Data", which contains every type of Univariate, Multivariate, and Functional data that can be simulated by the functions utilized here. These files serve to give the user some data they can use to run through this side of the application. However, the user is not limited to using just this data, as they can utilize any data they choose.
-
 ## File Upload- Input
 
 1.  The first step is to upload your data, which must be a CSV file. Pressing the "Browse" button will open a file explorer that will enable you to select your data, and upload it into the application.
@@ -52,7 +50,7 @@ Note: Within the FrequencyBandAnalysis folder, there is a subfolder entitled "Sa
 
 ## File Upload- Output
 
-Note: For Functional/Multivariate data, while the algorithm is running, a message will appear to tell you that you can track the progress of the algorithm in a newly-created text file.
+Note: For Functional/Multivariate data, while the algorithm is running, a message will appear to tell you that you can track the progress of the algorithm in a newly-created text file, which will be located in the working directory of your current R session.
 
 1.  Once Step 2 in the File Upload- Input section above has been completed, a plot of your data will appear in the main portion of the application. For data with multiple components, there will be a slider to let you scroll through each component (for multivariate data), or through each timepoint (for functional data). All other plots will only appear after the algorithm has finished running.
 
@@ -112,7 +110,7 @@ Note: Upon coming to this tab for the first time after opening the application, 
 
 ## Simulation Setting- Output
 
-Note: For Functional/Multivariate data, while the algorithm is running, a message will appear to tell you that you can track the progress of the algorithm in a newly-created text file.
+Note: For Functional/Multivariate data, while the algorithm is running, a message will appear to tell you that you can track the progress of the algorithm in a newly-created text file, which will be located in the working directory of your current R session.
 
 1.  The first plot that appears will simply be a plot of your data. For data with multiple components, there will be a slider to let you scroll through each component (for multivariate data), or through each timepoint (for functional data).
 
