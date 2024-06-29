@@ -22,9 +22,11 @@ EFBA::launchApp()
 
 # Introduction
 
-```{r, echo=FALSE, fig.cap="Screenshot of Application upon Opening", out.width = '90%'}
-knitr::include_graphics("https://github.com/dylanward01/EFBA/blob/ed85d64bd282c15e649273c32a454ae4210d90b8/man/figures/BlankShinyApp.png")
+```{r, echo=FALSE, fig.cap="Screenshot of Application upon Opening", fig.topcaption=TRUE, out.width = '90%'}
+knitr::include_graphics("http://github.com/dylanward01/EFBA/blob/ed85d64bd282c15e649273c32a454ae4210d90b8/man/figures/BlankShinyApp.png?raw=true")
 ```
+
+
 
 Upon opening the application, the user will see the above screenshot. As shown above, there are two tabs at the top of the screen- entitled "File Upload" and "Simulation Setting". These serve to enable the user to run these algorithms on either data that they upload, or on some simulated data, respectively. As such, this vignette will give a step-by-step guide on how to utilize both tabs of this application. This vignette is broken up into 2 sections (File Upload and Simulation Setting)- each of which has 2 subsections (Input and Output). Each of these sections serve to give a detailed explanation of either what needs to go into the application for the algorithm to run, or a detailed summary of the visual results that will be given after the algorithm runs. As such, the two input and output sections will be very similar to one another (but not identical- hence why they will all given below, in the sake of clarity). If you're only interested in running a single section of this application (either the File Upload, or the Simulation Setting), you can simply skip to that part in this Vignette.
 
@@ -85,9 +87,11 @@ Note: For Functional/Multivariate data, while the algorithm is running, a messag
 # Simulation Setting
 
 
-```{r, echo=FALSE, fig.cap="Screenshot of Simulation Setting side upon Opening", out.width = '90%'}
-knitr::include_graphics("C:/Users/Dylan/Downloads/SimSettingDefault.png")
+```{r, echo=FALSE, fig.cap="Screenshot of Simulation Setting side upon Opening", out.width = '90%', fig.topcaption=TRUE}
+knitr::include_graphics("https://github.com/dylanward01/EFBA/blob/46f9ce4de1c2c97465df93bf3b6b4a95b2fad0aa/man/figures/SimSettingDefault.png?raw=true")
 ```
+
+
 
 Note: Upon coming to this tab for the first time after opening the application, the user will see the above screenshot. There will be some default parameters for Univariate Data selected, and the results of running that algorithm will be given.
 
