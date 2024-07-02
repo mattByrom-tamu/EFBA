@@ -1,5 +1,5 @@
 ---
-title: "FEBA"
+title: "fEBA"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{FEBA}
