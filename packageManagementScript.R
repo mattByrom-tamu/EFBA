@@ -93,7 +93,8 @@ load_all()
 
 # build EBA vignette
 usethis::use_vignette("EBA")
-
+usethis::use_vignette("fEBA")
+usethis::use_vignette("mEBA")
 # test classes for EBA
 usethis::use_testthat()
 usethis::use_test("eba.search.R")
