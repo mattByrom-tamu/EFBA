@@ -12,7 +12,8 @@ Authors@R: c(
     person("Dylan", "Ward", role = "ctb"),
     person("Mohit", "Chhaparia", role = "ctb")
   )
-Imports: 
+Imports:
+    fields,
     momentchi2,
     Rcpp,
     stats,
@@ -24,16 +25,29 @@ Imports:
     ggplot2,
     shinyjs,
     plotly,
+    signal,
     RcppArmadillo
 Depends:
-    fields
+    fields,
+    momentchi2,
+    Rcpp,
+    stats,
+    fda,
+    shiny,
+    viridis,
+    grid,
+    gridExtra,
+    ggplot2,
+    shinyjs,
+    plotly,
+    signal,
+    RcppArmadillo
 RoxygenNote: 7.3.1
 Suggests: 
     compositions,
     fossil,
     knitr,
     rmarkdown,
-    signal,
     testthat (>= 3.0.0),
     viridis
 VignetteBuilder: knitr
