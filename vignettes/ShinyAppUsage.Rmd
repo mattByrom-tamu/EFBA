@@ -1,0 +1,141 @@
+---
+title: "Shiny App Usage"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ShinyAppUsage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This vignette serves to give a detailed explanation of how to use and interpret this shiny application that is seen within this package.
+
+In order to open the application, simply run the below line of code
+
+```{r, eval=FALSE}
+EFBA::launchApp()
+```
+
+
+# Introduction
+
+```{r, echo=FALSE, fig.cap="Screenshot of Application upon Opening", fig.topcaption=TRUE, out.width = '90%'}
+knitr::include_graphics("http://github.com/dylanward01/EFBA/blob/ed85d64bd282c15e649273c32a454ae4210d90b8/man/figures/BlankShinyApp.png?raw=true")
+```
+
+
+
+Upon opening the application, the user will see the above screenshot. As shown above, there are two tabs at the top of the screen- entitled "File Upload" and "Simulation Setting". These serve to enable the user to run these algorithms on either data that they upload, or on some simulated data, respectively. As such, this vignette will give a step-by-step guide on how to utilize both tabs of this application. This vignette is broken up into 2 sections (File Upload and Simulation Setting)- each of which has 2 subsections (Input and Output). Each of these sections serve to give a detailed explanation of either what needs to go into the application for the algorithm to run, or a detailed summary of the visual results that will be given after the algorithm runs. As such, the two input and output sections will be very similar to one another (but not identical- hence why they will all given below, in the sake of clarity). If you're only interested in running a single section of this application (either the File Upload, or the Simulation Setting), you can simply skip to that part in this Vignette.
+
+# File Upload
+
+## File Upload- Input
+
+1.  The first step is to upload your data, which must be a CSV file. Pressing the "Browse" button will open a file explorer that will enable you to select your data, and upload it into the application.
+
+-   If your data has column names, they will be kept and read in, so long as you check the box next to Header prior to selecting your data.
+
+-   The data must be entirely numeric for the algorithm to run properly. A corresponding warning message will appear if the data that is read in isn't numeric.
+
+2.  If your data has multiple components, you will be prompted to select whether your data is Multivariate or Functional. If your uploaded data is Univariate, predictably, you won't see this prompt.
+
+3.  Now, the dimensions of your data will appear below where you inputted the data. Additionally, for Multivariate/Functional data, there will be a selection for whether or not you want to include 3D Plots in the output. Next, you should choose values for each of the parameters that you see. These will initially all be filled with a default value that will work, however you can change each of these values to any number of valid choices.
+
+-   "Valid Choices" are denoted by "\*'s", and explained as a footnote. This serves to give the absolute range of values that can be utilized, that will still let the algorithm run. Choosing a value that is outside of this range will either cause an error, or crash the application.
+
+4.  Once you are finished selecting values for all of the options seen, you can press the "Run" button, which will run the algorithm on your data, with the selected values as parameters.
+
+## File Upload- Output
+
+Note: For Functional/Multivariate data, while the algorithm is running, a message will appear to tell you that you can track the progress of the algorithm in a newly-created text file, which will be located in the working directory of your current R session.
+
+1.  Once Step 2 in the File Upload- Input section above has been completed, a plot of your data will appear in the main portion of the application. For data with multiple components, there will be a slider to let you scroll through each component (for multivariate data), or through each timepoint (for functional data). All other plots will only appear after the algorithm has finished running.
+
+2.  The next plot will differ slightly depending on what type of data is being used:
+
+-   For Univariate data, this will be a plot of the multitaper autospectrogram, with the estimated partition points represented by a light blue line on the corresponding frequencies. This is accompanied with a table, denoting each of the predicted frequency bands.
+
+-   For Multivariate data, this will be a plot of the multitaper autospectrogram, with the estimated partition points represented by a light blue line on the corresponding frequencies. This is accompanied with a table, denoting each of the predicted frequency bands. Additionally, there is a slider below the plot to let you view this for every "diagonal" cross-component (such as the cross-components 1-1, 2-2, etc.).
+
+-   For Functional data, this will be a plot of the multitaper autospectrogram, with the estimated partition points represented by a light blue line on the corresponding frequencies. This is accompanied with a table, denoting each of the predicted frequency bands. Additionally, there is a slider below the plot to let you view this for every cross-component. If a "diagonal" cross-component is selected (such as the cross-components 1-1, 2-2, etc.), this plot will be the multitaper autospectrogram for that component. If a "non-diagonal" cross-component is selected (such as the cross-components 1-2, 3-1, etc.), this plot will be the signal coherence between those two components.
+
+3.  Next, there may or may not be 3D Plots- as this depends on the type of data that is being used. Additionally, these plots will not show if you chose to exclude these 3D Plots, in an earlier mentioned selection.
+
+-   For Univariate data, there will be no 3D Plots.
+
+-   For Multivariate data, there will be one 3D Plot. It will be a 3D version of the multitaper autospectrogram plot seen above, but this plot doesn't have anything denoting the predicted significant partition points. However, there is still a slider, to enable viewing this plot for every "diagonal" cross-component (such as the cross-components 1-1, 2-2, etc.).
+
+-   For Functional data, there will be two 3D Plots. The first plot will be a 3D Plot of the entire dataset. It can be seen as an amalgamation of the first plot in this selection at every timepoint. The second plot will be a 3D version of the multitaper autospectrogram/coherence plot seen above, but this plot doesn't have anything denoting the predicted significant partition points. However, there is still a slider, to enable viewing this plot for every cross-component.
+
+4.  Lastly, summary tables and a scatterplot of p-values that can be seen.
+
+-   There is a table entitled "Summary of Partition Point Tests"- which contains the frequency, along with its corresponding p-value, p-value threshold, and whether or not it is a significant partition point for every frequency deemed significant. If there were no frequencies deemed to be significant partition points, then the table will display the frequency that had the lowest corresponding p-value, and note that it was not a significant partition point. (Note: The algorithm for Functional Data is constructed such that it will test groups of frequencies at once, to see if there is a significant partition point within that group. As such, the results from each group's tests will be displayed in the summary tables- even if they are all not significant partition points).
+
+-   For Univariate data, there is also an additional table entitled "Summary of testing for Flat Spectrum in Each Segment". This table contains information on whether or not each predicted frequency band has a flat, or non-flat spectrum.
+
+-   The scatterplot serves to plot the p-value for testing whether a given frequency is a significant partition point against the frequencies that were tested. If any frequencies were deemed to be a significant partition point, then a vertical dashed line will be present at that given frequency in the plot.
+
+5.  At the very bottom of the page, there is a button to "Download the Above Results", which will download the plots and tables seen above into a 2-page pdf file. The first page will consist of plots 1 and 2, as they were mentioned in this section. (Note: For Multivariate/Functional data, whichever component/timepoint you have chosen for each of the above plots with a slider when you press the Download button will be the component/timepoint selected for that plot in the pdf). The second page will consist of the plots and tables mentioned above in 4.
+
+\newpage
+
+# Simulation Setting
+
+
+```{r, echo=FALSE, fig.cap="Screenshot of Simulation Setting side upon Opening", out.width = '90%', fig.topcaption=TRUE}
+knitr::include_graphics("https://github.com/dylanward01/EFBA/blob/46f9ce4de1c2c97465df93bf3b6b4a95b2fad0aa/man/figures/SimSettingDefault.png?raw=true")
+```
+
+
+
+Note: Upon coming to this tab for the first time after opening the application, the user will see the above screenshot. There will be some default parameters for Univariate Data selected, and the results of running that algorithm will be given.
+
+
+## Simulation Setting- Input
+
+1.  The first step is to select the type of data that you want to use- either Univariate, Multivariate, or Functional. This choice will change the various parameters that can be seen below. Additionally, for Multivariate/Functional data, there will be a selection for whether or not you want to include 3D Plots in the output. After this, you should choose one of the options under the Simulation Setting drop down (Sinusoidal, Linear, etc.), as this will choose the type of simulated data that you want to run this algorithm on.
+
+-   If "White Noise" was chosen under the Simulation Setting, the data will be generated such that it will have no actual partition points.
+
+-   If any other choice was selected under the Simulation Setting, the data will be generated such that it will have partition points at frequencies of 0.15 Hz and 0.35 Hz.
+
+2.  Next, you should choose values for each of the parameters that you see. These will all be filled with a default value that will work, however you can change each of these values to a couple other valid, preset choices.
+
+-   "Valid Choices" are denoted by "\*'s", and explained as a footnote. This serves to give a couple values that can work in running the algorithm.
+
+3.  Once you are finished selecting values for the options seen, you can press the "Run" button, which will run the algorithm on the chosen simulated data, with the selected values as parameters.
+
+## Simulation Setting- Output
+
+Note: For Functional/Multivariate data, while the algorithm is running, a message will appear to tell you that you can track the progress of the algorithm in a newly-created text file, which will be located in the working directory of your current R session.
+
+1.  The first plot that appears will simply be a plot of your data. For data with multiple components, there will be a slider to let you scroll through each component (for multivariate data), or through each timepoint (for functional data).
+
+2.  The next plot will differ slightly depending on what type of data is being used:
+
+-   For Univariate data, this will be a plot of the multitaper autospectrogram, with the estimated partition points represented by a light blue line on the corresponding frequencies, and the actual partition points represented by a neon green line on the corresponding frequencies. This is accompanied with a table, denoting each of the predicted and actual frequency bands.
+
+-   For Multivariate data, this will be a plot of the multitaper autospectrogram, with the estimated partition points represented by a light blue line on the corresponding frequencies, and the actual partition points represented by a neon green line on the corresponding frequencies. This is accompanied with a table, denoting each of the predicted and actual frequency bands. Additionally, there is a slider below the plot to let you view this for every "diagonal" cross-component (such as the cross-components 1-1, 2-2, etc.).
+
+-   For Functional data, this will be a plot of the multitaper autospectrogram, with the estimated partition points represented by a light blue line on the corresponding frequencies, and the actual partition points represented by a neon green line on the corresponding frequencies. This is accompanied with a table, denoting each of the predicted and actual frequency bands. Additionally, there is a slider below the plot to let you view this for every cross-component. If a "diagonal" cross-component is selected (such as the cross-components 1-1, 2-2, etc.), this plot will be the multitaper autospectrogram for that component. If a "non-diagonal" cross-component is selected (such as 1-2, 3-1, etc.), this plot will be the signal coherence between those two components.
+
+3.  Next, there may or may not be 3D Plots- as this depends on the type of data that is being used. Additionally, these plots will not show if you chose to exclude these 3D Plots, in an earlier mentioned selection.
+
+-   For Univariate data, there will be no 3D Plots.
+
+-   For Multivariate data, there will be one 3D Plot. It will be a 3D version of the multitaper autospectrogram plot seen above, but this plot doesn't have anything denoting the actual or predicted significant partition points. However, there is still a slider, to enable viewing this plot for every "diagonal" cross-component (such as the cross-components 1-1, 2-2, etc.).
+
+-   For Functional data, there will be two 3D Plots. The first plot will be a 3D Plot of the entire dataset. It can be seen as an amalgamation of the first plot in this selection at every timepoint. The second plot will be a 3D version of the multitaper autospectrogram/coherence plot seen above, but this plot doesn't have anything denoting the actual or predicted significant partition points. However, there is still a slider, to enable viewing this plot for every cross-component.
+
+4.  Lastly, summary tables and a scatterplot of p-values that can be seen.
+
+-   There is a table entitled "Summary of Partition Point Tests"- which contains the frequency, along with its corresponding p-value, p-value threshold, and whether or not it is a significant partition point for every frequency deemed significant. If there were no frequencies deemed to be significant partition points, then the table will display the frequency that had the lowest corresponding p-value, and note that it was not a significant partition point. (Note: The algorithm for Functional Data is constructed such that it will test groups of frequencies at once, to see if there is a significant partition point within that group. As such, the results from each group's tests will be displayed in the summary tables- even if they are all not significant partition points).
+
+-   For Univariate data, there is an additional table entitled "Summary of testing for Flat Spectrum in Each Segment". This table contains information on whether or not each predicted frequency band has a flat, or non-flat spectrum.
+
+-   The scatterplot serves to plot the p-value for testing whether a given frequency is a significant partition point against the frequencies that were tested. If any frequencies were deemed to be a significant partition point, then a vertical dashed line will be present at that given frequency in the plot.
+
+5.  At the very bottom of the page, there is a button to "Download the Above Results", which will download the plots and tables seen above into a 2-page pdf file. The first page will consist of plots 1 and 2, as they were mentioned in this section. (Note: For Multivariate/Functional data, whichever component/timepoint you have chosen for each of the above plots with a slider when you press the Download button will be the component/timepoint selected for that plot in the pdf). The second page will consist of the plots and tables mentioned above in 4.
