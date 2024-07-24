@@ -13,20 +13,7 @@ Authors@R: c(
     person("Mohit", "Chhaparia", role = "ctb")
   )
 Imports:
-    fields,
-    momentchi2,
-    Rcpp,
-    stats,
-    fda,
-    shiny,
-    viridis,
-    grid,
-    gridExtra,
-    ggplot2,
-    shinyjs,
-    plotly,
-    signal,
-    RcppArmadillo
+    usethis
 Depends:
     fields,
     momentchi2,
@@ -41,7 +28,6 @@ Depends:
     shinyjs,
     plotly,
     signal,
-    usethis,
     RcppArmadillo
 RoxygenNote: 7.3.1
 Suggests: 
@@ -50,7 +36,6 @@ Suggests:
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
-    viridis
 VignetteBuilder: knitr
 LinkingTo: 
     Rcpp,
