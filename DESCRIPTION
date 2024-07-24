@@ -13,7 +13,8 @@ Authors@R: c(
     person("Mohit", "Chhaparia", role = "ctb")
   )
 Imports:
-    usethis
+    usethis,
+    RcppArmadillo
 Depends:
     fields,
     momentchi2,
