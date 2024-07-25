@@ -13,8 +13,7 @@ Authors@R: c(
     person("Mohit", "Chhaparia", role = "ctb")
   )
 Imports:
-    usethis,
-    RcppArmadillo
+    usethis
 Depends:
     fields,
     momentchi2,
@@ -28,8 +27,7 @@ Depends:
     ggplot2,
     shinyjs,
     plotly,
-    signal,
-    RcppArmadillo
+    signal
 RoxygenNote: 7.3.1
 Suggests: 
     compositions,
