@@ -299,8 +299,39 @@ arma::mat tsbootH0(arma::mat x, arma::mat rndraws, int ncore){
     return pgram;
   }
 
+//' Generate Multitaper Estimator of Power Spectrum for Functional Data
+//' @description
+//' This function takes in the aforementioned functional data, as well as a few other parameters, and returns the multitaper
+//' estimate of the power spectrum for the data. This works in a piecewise manner, hence why it has the suffix _pmt, for piecewise
+//' multitaper
+//'
+//' @param X A T X R matrix of the functional data, where T is the length of the time series, and R is the number of components.
+//' @param K The number of tapers to utilize in estimating the local power spectrum. K must satisfy: 1 <= K < floor(N/4 - 1)
+//' @param N The number of observations that will be contained in each roughly stationary block. N must satisfy: 30 <= N <= T
+//' @param Rsel The number of points within the functional domain that will be used for computing test statistics. Rsel must satisfy: 1 <= Rsel <= R
+//' @param stdz A binary indicator to show whether the variance in each stationary block should be standardized.
+//' @return A 3-Dimensional matrix containing the multitaper estimator. Its dimensions are A x B x C, where A = floor(N/2 + 1), B = Rsel^2, and C = floor(T / N)
 //' @export
- // [[Rcpp::export]]
+//' @examples
+//' nb=15; #number of basis functions used to generate white noise
+//' R=5; #number of points in functional domain
+//' Ts=2000; #length of time series
+//' seed=234; #seed for reproducibility
+//' X=fws.sim(nb=nb,gsz=R,Ts=Ts,seed=seed);
+//' ##estimate and visualize power spectrum estimates for specific components
+//' B=5; #number of time blocks
+//' N=Ts/B; #number of observations per time block
+//' bw=0.04; #bandwidth for multitaper spectral estimator
+//' K=max(1,floor(bw*(N+1)-1)); #number of tapers for multitaper spectral estimator
+//' std=FALSE; #standardize variance for points in functional domain (TRUE) or not (FALSE)
+//' freq=seq(from=0,by=1/N,length.out=floor(N/2)+1); #Fourier frequencies
+//' Rsel=4; #number of points in functional domain used for test statistics
+//' pse=fhat_pmt(X,N,K,Rsel,std);
+//' @details
+//'  Every input must be either a Boolean or Numeric, as mentioned above \cr \cr
+//' For more information on how this data is simulated, consult the corresponding paper at https://arxiv.org/abs/2102.01784
+//' @export
+// [[Rcpp::export]]
  arma::cx_cube fhat_pmt(arma::mat X, int N, int K, int Rsel, bool stdz){
 
    //reduce components of X if Rsel<R
