@@ -1,7 +1,24 @@
+
+#' Simulate Functional White Noise Data
+#' @description
+#' The function fws.sim will simulate a functional time series of white noise data
+#'
+#' @param nb Number of basis functions to use when simulating the data. Default value is 15
+#' @param gsz Number of points along the functional domain at which to evaluate these basis functions. Default value is 20
+#' @param Ts Numeric/integer with total length of intended time series
+#' @param seed The seed you wish to set, to ensure reproducibility
+#' @return A Ts x gsz dimension matrix, containing the simulated values
 #' @export
 #' @importFrom fda create.bspline.basis
 #' @importFrom fda eval.basis
 #' @importFrom stats rnorm
+#' @examples
+#' fws.sim(Ts = 2000, seed = 234)
+#' @details
+#' If no values for nb or gsz are selected, the function will utilize the aforementioned default values of 15 and 20, respectively.
+#' Ts and seed need to be provided every time the function is run.
+#' Every input must be a numeric, positive number.
+
 #function to simulate functional white noise data
 fws.sim <- function(nb=15,gsz=20,Ts,seed){
 
