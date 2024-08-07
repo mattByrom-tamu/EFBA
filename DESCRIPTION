@@ -13,7 +13,8 @@ Authors@R: c(
     person("Mohit", "Chhaparia", role = "ctb")
   )
 Imports:
-    usethis (== 2.2.3),
+    usethis (== 3.0.0)
+Depends:
     fields (== 15.2),
     momentchi2 (== 0.1.5),
     Rcpp (== 1.0.12),
@@ -26,9 +27,7 @@ Imports:
     ggplot2 (== 3.5.1),
     shinyjs (== 2.1.0),
     plotly (== 4.10.4),
-    signal (== 1.8-0)
-Depends:
-    fields 
+    signal (== 1.8-0) 
 RoxygenNote: 7.3.1
 Suggests: 
     compositions,
