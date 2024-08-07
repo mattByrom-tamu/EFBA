@@ -4,7 +4,7 @@
 #' The function fws.sim will simulate a functional time series of white noise data
 #'
 #' @param nb Number of basis functions to use when simulating the data. Default value is 15
-#' @param gsz Number of points along the functional domain at which to evaluate these basis functions. Default value is 20
+#' @param gsz Number of points along the functional domain where the basis functions will be evaluated. Default value is 20
 #' @param Ts Numeric/integer with total length of intended time series
 #' @param seed The seed you wish to set, to ensure reproducibility
 #' @return A Ts x gsz dimension matrix, containing the simulated values
@@ -48,7 +48,7 @@ fws.sim <- function(nb=15,gsz=20,Ts,seed){
 #' The function f3bL.sim will simulate a functional time series consisting of 3 bands, that follows a linear trend.
 #'
 #' @param nb Number of basis functions to use when simulating the data. Default value is 15
-#' @param gsz Number of points along the functional domain at which to evaluate these basis functions. Default value is 20
+#' @param gsz Number of points along the functional domain where the basis functions will be evaluated. Default value is 20
 #' @param Ts Numeric/integer with total length of intended time series
 #' @param seed The seed you wish to set, to ensure reproducibility
 #' @return A Ts x gsz dimension matrix, containing the simulated values
@@ -124,7 +124,7 @@ f3bL.sim <- function(nb,gsz,Ts,seed){
 #' The function f3bS.sim will simulate a functional time series consisting of 3 bands, that follows a sinusoidal trend.
 #'
 #' @param nb Number of basis functions to use when simulating the data. Default value is 15
-#' @param gsz Number of points along the functional domain at which to evaluate these basis functions. Default value is 20
+#' @param gsz Number of points along the functional domain where the basis functions will be evaluated. Default value is 20
 #' @param Ts Numeric/integer with total length of intended time series
 #' @param seed The seed you wish to set, to ensure reproducibility
 #' @return A Ts x gsz dimension matrix, containing the simulated values
@@ -199,7 +199,7 @@ f3bS.sim <- function(nb,gsz,Ts,seed){
 #' Functional Data (either simulated or uploaded) is inputted into this algorithm, along with values for different parameters, in order to
 #' return the frequencies at which significant partitions occur.
 #'
-#' @param X A matrix with T rows and R columns, that is a realization of the Functional Time Series that will be analyzed. T is the length of the time series, and R is the number of points in the functional domain where the function is observed.
+#' @param X A matrix with T rows and R columns, that is a realization of the Functional Time Series that will be analyzed. T is the length of the time series, and R is the number of points in the functional domain where the function is observed. The data must be entirely numeric.
 #' @param Rsel The number of points within the functional domain that will be used for computing test statistics. Rsel must satisfy: 1 <= Rsel <= R
 #' @param K The number of tapers to utilize in estimating the local power spectrum. K must satisfy: 1 <= K < floor(N/4 - 1)
 #' @param N The number of observations that will be contained in each roughly stationary block. N must satisfy: 30 <= N <= T
@@ -208,7 +208,7 @@ f3bS.sim <- function(nb,gsz,Ts,seed){
 #' @param std A binary indicator to show whether the variance in each stationary block should be standardized.
 #' @param blockdiag A binary indicator to show whether the covariance matrix for the gaussian process should be approximated with a block diagonal structure.
 #' @param dcap The number of frequencies to test in a single pass
-#' @return A list containing 6 different objects: \cr
+#' @return A list containing 6 different objects: \cr \cr
 #' 1- A numeric vector, with the endpoints of the functional domain, along with any frequencies that were deemed to be significant partition points. \cr \cr
 #' 2- A list, where the first entry is the endpoints of the functional domain, and any additional entries consist of those endpoints, and any frequencies deemed significant. \cr \cr
 #' 3- A matrix that serves to summarize the results of each pass of the algorithm. \cr \cr
