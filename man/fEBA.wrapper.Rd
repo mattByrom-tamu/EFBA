@@ -7,7 +7,7 @@
 fEBA.wrapper(X, Rsel, K, N, ndraw, alpha, std, blockdiag, dcap = 10^10)
 }
 \arguments{
-\item{X}{A matrix with T rows and R columns, that is a realization of the Functional Time Series that will be analyzed. T is the length of the time series, and R is the number of points in the functional domain where the function is observed.}
+\item{X}{A matrix with T rows and R columns, that is a realization of the Functional Time Series that will be analyzed. T is the length of the time series, and R is the number of points in the functional domain where the function is observed. The data must be entirely numeric.}
 
 \item{Rsel}{The number of points within the functional domain that will be used for computing test statistics. Rsel must satisfy: 1 <= Rsel <= R}
 
@@ -26,7 +26,7 @@ fEBA.wrapper(X, Rsel, K, N, ndraw, alpha, std, blockdiag, dcap = 10^10)
 \item{dcap}{The number of frequencies to test in a single pass}
 }
 \value{
-A list containing 6 different objects: \cr
+A list containing 6 different objects: \cr \cr
 1- A numeric vector, with the endpoints of the functional domain, along with any frequencies that were deemed to be significant partition points. \cr \cr
 2- A list, where the first entry is the endpoints of the functional domain, and any additional entries consist of those endpoints, and any frequencies deemed significant. \cr \cr
 3- A matrix that serves to summarize the results of each pass of the algorithm. \cr \cr

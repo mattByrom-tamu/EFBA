@@ -9,7 +9,7 @@ f3bS.sim(nb, gsz, Ts, seed)
 \arguments{
 \item{nb}{Number of basis functions to use when simulating the data. Default value is 15}
 
-\item{gsz}{Number of points along the functional domain at which to evaluate these basis functions. Default value is 20}
+\item{gsz}{Number of points along the functional domain where the basis functions will be evaluated. Default value is 20}
 
 \item{Ts}{Numeric/integer with total length of intended time series}
 
