@@ -311,7 +311,6 @@ arma::mat tsbootH0(arma::mat x, arma::mat rndraws, int ncore){
 //' @param Rsel The number of points within the functional domain that will be used for computing test statistics. Rsel must satisfy: 1 <= Rsel <= R
 //' @param stdz A binary indicator to show whether the variance in each stationary block should be standardized.
 //' @return A 3-Dimensional matrix containing the multitaper estimator. Its dimensions are A x B x C, where A = floor(N/2 + 1), B = Rsel^2, and C = floor(T / N)
-//' @export
 //' @examples
 //' nb=15; #number of basis functions used to generate white noise
 //' R=5; #number of points in functional domain
