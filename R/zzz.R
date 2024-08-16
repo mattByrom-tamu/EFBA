@@ -29,7 +29,7 @@ efbaStartupMessage <- function()
 .onAttach <- function(lib, pkg)
 {
   # unlock .EFBA variable allowing its modification
-  unlockBinding(".EFBA", asNamespace("EFBA")) 
+  #unlockBinding(".EFBA", asNamespace("EFBA")) 
   # startup message
   msg <- efbaStartupMessage()
   if(!interactive())
