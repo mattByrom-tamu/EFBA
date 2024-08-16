@@ -13,21 +13,21 @@ Authors@R: c(
     person("Mohit", "Chhaparia", role = "ctb")
   )
 Imports:
-    usethis (== 3.0.0)
+    usethis (>= 3.0.0)
 Depends:
-    fields (== 16.2),
-    momentchi2 (== 0.1.5),
-    Rcpp (== 1.0.13),
-    stats (== 4.3.1),
-    fda (== 6.1.8),
-    shiny (== 1.9.1),
-    viridis (== 0.6.5),
-    grid (== 4.3.1),
-    gridExtra (== 2.3),
-    ggplot2 (== 3.5.1),
-    shinyjs (== 2.1.0),
-    plotly (== 4.10.4),
-    signal (== 1.8-1) 
+    fields (>= 16.2),
+    momentchi2 (>= 0.1.5),
+    Rcpp (>= 1.0.13),
+    stats (>= 4.3.1),
+    fda (>= 6.1.8),
+    shiny (>= 1.9.1),
+    viridis (>= 0.6.5),
+    grid (>= 4.3.1),
+    gridExtra (>= 2.3),
+    ggplot2 (>= 3.5.1),
+    shinyjs (>= 2.1.0),
+    plotly (>= 4.10.4),
+    signal (>= 1.8-1) 
 RoxygenNote: 7.3.1
 Suggests: 
     compositions,
