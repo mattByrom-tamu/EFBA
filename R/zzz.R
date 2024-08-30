@@ -22,6 +22,7 @@ efbaStartupMessage <- function()
       msg <- cat(msg, "\n * The EFBA package was constructed using version", versions[pkg[i]], "of the package", dependencies[pkg[i]], 
                  "and you currently are using version", as.character(packageVersion(dependencies[pkg[i]])), "of that package")
     }
+    msg <- cat(msg, "If you wish to run this package in a version controlled enviroment- please visit our dockerhub container.")
   }
   return(msg)
 }
@@ -29,7 +30,7 @@ efbaStartupMessage <- function()
 .onAttach <- function(lib, pkg)
 {
   # unlock .EFBA variable allowing its modification
-  #unlockBinding(".EFBA", asNamespace("EFBA")) 
+  unlockBinding(".EFBA", env = asNamespace("EFBA")) 
   # startup message
   msg <- efbaStartupMessage()
   if(!interactive())
