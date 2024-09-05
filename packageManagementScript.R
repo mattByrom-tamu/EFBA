@@ -93,7 +93,8 @@ load_all()
 
 # build EBA vignette
 usethis::use_vignette("EBA")
-
+usethis::use_vignette("fEBA")
+usethis::use_vignette("mEBA")
 # test classes for EBA
 usethis::use_testthat()
 usethis::use_test("eba.search.R")
@@ -110,6 +111,8 @@ usethis::use_github_action()
 
 # add C++, rcpp, and armadillo to code base
 usethis::use_rcpp_armadillo()
+### try without armadillo()
+usethis::use_rcpp()
 # update documentation, have to delete namespace first sometimes
 devtools::document()
 
