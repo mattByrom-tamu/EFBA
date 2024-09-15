@@ -41,7 +41,6 @@ return the frequencies at which significant partitions occur.
 \details{
 This code has only been tested for the following dimensions: T <= 50000, K <= 49, N <= 1000, Rsel <= 10 \cr \cr
 Every input must be either a Boolean or Numeric, as mentioned above \cr \cr
-For more information on how this algorithm is run, and how to understand its results, consult the corresponding paper at https://arxiv.org/abs/2102.01784
 }
 \examples{
 nb=15; #number of basis functions used to generate white noise
@@ -69,4 +68,7 @@ dcap=40; #max number of frequencies tested in a given pass
 alpha=0.05/ceiling((1-2*bw/0.5)*(floor(N/2)+1)/dcap); #alpha with Bonferroni correction
 run.wn <- fEBA.wrapper(X,Rsel,K,N,ndraw,alpha,std,blockdiag,dcap);
 print(run.wn$summary);
+}
+\references{
+https://arxiv.org/abs/2102.01784
 }
