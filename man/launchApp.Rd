@@ -19,7 +19,7 @@ There is a vignette entitled "ShinyAppUsage" that is included with this package,
 launchApp()
 }
 \references{
-(Univariate): doi.org/10.1080/01621459.2019.1671199
-(Multivariate): doi.org/10.48550/arXiv.2301.03664
-(Functional): doi.org/10.48550/arXiv.2102.01784
+(Univariate): doi.org/10.1080/01621459.2019.1671199 \cr \cr
+(Multivariate): doi.org/10.48550/arXiv.2301.03664 \cr \cr
+(Functional): doi.org/10.48550/arXiv.2102.01784 \cr \cr
 }
