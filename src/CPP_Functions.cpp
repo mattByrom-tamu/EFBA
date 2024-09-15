@@ -328,7 +328,7 @@ arma::mat tsbootH0(arma::mat x, arma::mat rndraws, int ncore){
 //' pse=fhat_pmt(X,N,K,Rsel,std);
 //' @details
 //'  Every input must be either a Boolean or Numeric, as mentioned above \cr \cr
-//' For more information on how this data is simulated, consult the corresponding paper at https://arxiv.org/abs/2102.01784
+//' @references https://arxiv.org/abs/2102.01784
 //' @export
 // [[Rcpp::export]]
  arma::cx_cube fhat_pmt(arma::mat X, int N, int K, int Rsel, bool stdz){
