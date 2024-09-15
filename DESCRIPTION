@@ -13,36 +13,21 @@ Authors@R: c(
     person("Mohit", "Chhaparia", role = "ctb")
   )
 Imports:
-    fields,
-    momentchi2,
-    Rcpp,
-    stats,
-    fda,
-    shiny,
-    viridis,
-    grid,
-    gridExtra,
-    ggplot2,
-    shinyjs,
-    plotly,
-    signal,
-    RcppArmadillo
+    usethis (>= 3.0.0)
 Depends:
-    fields,
-    momentchi2,
-    Rcpp,
-    stats,
-    fda,
-    shiny,
-    viridis,
-    grid,
-    gridExtra,
-    ggplot2,
-    shinyjs,
-    plotly,
-    signal,
-    usethis,
-    RcppArmadillo
+    fields (>= 15.2),
+    momentchi2 (>= 0.1.5),
+    Rcpp (>= 1.0.13),
+    stats (>= 4.3.1),
+    fda (>= 6.1.8),
+    shiny (>= 1.9.1),
+    viridis (>= 0.6.5),
+    grid (>= 4.3.1),
+    gridExtra (>= 2.3),
+    ggplot2 (>= 3.5.1),
+    shinyjs (>= 2.1.0),
+    plotly (>= 4.10.4),
+    signal (>= 1.8-1) 
 RoxygenNote: 7.3.1
 Suggests: 
     compositions,
@@ -50,7 +35,6 @@ Suggests:
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
-    viridis
 VignetteBuilder: knitr
 LinkingTo: 
     Rcpp,

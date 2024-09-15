@@ -25,8 +25,10 @@ The function fws.sim will simulate a functional time series of white noise data
 If no values for nb or gsz are selected, the function will utilize the aforementioned default values of 15 and 20, respectively. \cr \cr
 Ts and seed need to be provided every time the function is run. \cr \cr
 Every input must be a numeric, positive number. \cr \cr
-For more information on how this data is simulated, consult the corresponding paper at https://arxiv.org/abs/2102.01784
 }
 \examples{
 fws.sim(Ts = 2000, seed = 234)
+}
+\references{
+https://arxiv.org/abs/2102.01784
 }

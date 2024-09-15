@@ -27,7 +27,6 @@ multitaper
 }
 \details{
 Every input must be either a Boolean or Numeric, as mentioned above \cr \cr
-For more information on how this data is simulated, consult the corresponding paper at https://arxiv.org/abs/2102.01784
 }
 \examples{
 nb=15; #number of basis functions used to generate white noise
@@ -44,4 +43,7 @@ std=FALSE; #standardize variance for points in functional domain (TRUE) or not (
 freq=seq(from=0,by=1/N,length.out=floor(N/2)+1); #Fourier frequencies
 Rsel=4; #number of points in functional domain used for test statistics
 pse=fhat_pmt(X,N,K,Rsel,std);
+}
+\references{
+https://arxiv.org/abs/2102.01784
 }

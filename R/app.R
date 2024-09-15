@@ -1,6 +1,7 @@
 
 # Set up Layout for Application
 #' @import shiny
+#' @importFrom usethis use_pipe
 #' @importFrom shinyjs show
 #' @importFrom shinyjs hide
 #' @importFrom shinyjs useShinyjs

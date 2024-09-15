@@ -18,7 +18,7 @@
 #' If no values for nb or gsz are selected, the function will utilize the aforementioned default values of 15 and 20, respectively. \cr \cr
 #' Ts and seed need to be provided every time the function is run. \cr \cr
 #' Every input must be a numeric, positive number. \cr \cr
-#' For more information on how this data is simulated, consult the corresponding paper at https://arxiv.org/abs/2102.01784
+#' @references https://arxiv.org/abs/2102.01784
 
 #function to simulate functional white noise data
 fws.sim <- function(nb=15,gsz=20,Ts,seed){
@@ -61,7 +61,7 @@ fws.sim <- function(nb=15,gsz=20,Ts,seed){
 #' If no values for nb or gsz are selected, the function will utilize the aforementioned default values of 15 and 20, respectively. \cr \cr
 #' Ts and seed need to be provided every time the function is run. \cr \cr
 #' Every input must be a numeric, positive number. \cr \cr
-#' For more information on how this data is simulated, consult the corresponding paper at https://arxiv.org/abs/2102.01784
+#' @references https://arxiv.org/abs/2102.01784
 
 #function to simulate nonstationary 3 band linear data
 f3bL.sim <- function(nb,gsz,Ts,seed){
@@ -137,7 +137,7 @@ f3bL.sim <- function(nb,gsz,Ts,seed){
 #' If no values for nb or gsz are selected, the function will utilize the aforementioned default values of 15 and 20, respectively. \cr \cr
 #' Ts and seed need to be provided every time the function is run. \cr \cr
 #' Every input must be a numeric, positive number. \cr \cr
-#' For more information on how this data is simulated, consult the corresponding paper at https://arxiv.org/abs/2102.01784
+#' @references https://arxiv.org/abs/2102.01784
 
 #function to simulate nonstationary 3 band sinusoidal data
 f3bS.sim <- function(nb,gsz,Ts,seed){
@@ -254,7 +254,7 @@ f3bS.sim <- function(nb,gsz,Ts,seed){
 #' @details
 #' This code has only been tested for the following dimensions: T <= 50000, K <= 49, N <= 1000, Rsel <= 10 \cr \cr
 #' Every input must be either a Boolean or Numeric, as mentioned above \cr \cr
-#' For more information on how this algorithm is run, and how to understand its results, consult the corresponding paper at https://arxiv.org/abs/2102.01784
+#' @references https://arxiv.org/abs/2102.01784
 
 #function to run iterative eba algorithm
 fEBA.wrapper <- function(X,Rsel,K,N,ndraw,alpha,std,blockdiag,dcap=10^10){
